@@ -20,6 +20,9 @@ img {
     border-radius: 5px;
     width: 100%;
 }
+p {
+    width: 100%;
+}
 nav {
     display: flex;
     justify-content: space-between;
@@ -34,6 +37,9 @@ nav a {
 nav a:hover {
     background-color: darkgoldenrod;
     color: black;
+}
+* {
+    box-sizing: border-box;
 }
 @media screen and (max-width: 550px) {
     h1 {
