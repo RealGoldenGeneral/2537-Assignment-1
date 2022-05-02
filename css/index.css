@@ -8,3 +8,7 @@ nav {
     background-color: darkred;
     color: white;
 }
+nav a {
+    display: inline-block;
+    padding: 10px;
+}
