@@ -2,6 +2,9 @@ html {
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+body {
+    margin: 0px;
+}
 nav {
     display: flex;
     justify-content: space-between;
