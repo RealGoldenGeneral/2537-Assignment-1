@@ -20,3 +20,8 @@ nav a:hover {
     background-color: darkgoldenrod;
     color: black;
 }
+@media screen and (max-wdith: 550px) {
+    h1 {
+        margin: 0px;
+    }
+}
