@@ -11,6 +11,11 @@ main {
     justify-content: center;
     gap: 10px;
 }
+#center {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 img {
     border-radius: 5px;
     width: 100%;
