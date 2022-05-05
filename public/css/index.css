@@ -12,15 +12,20 @@ main {
     gap: 10px;
 }
 .image_container {
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 img {
+    opacity: 1;
     border-radius: 5px;
     width: 100%;
 }
 p {
+    opacity: 1;
     width: 100%;
 }
 nav {

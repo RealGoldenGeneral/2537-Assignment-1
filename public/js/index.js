@@ -1,4 +1,3 @@
-const { type } = require("express/lib/response")
 
 to_add = ''
 css_add = ''
@@ -7,8 +6,8 @@ function colourChooser (data) {
     type = []
     firstColour = ""
     secondColour = ""
-    for (k = 0; k < data.types.length; k++) {
-        type += data.types[k].type.name
+    for (l = 0; l < data.types.length; l++) {
+        type[l] = data.types[l].type.name
     }
     
     for (k = 0; k < type.length; k++) {
@@ -28,7 +27,7 @@ function colourChooser (data) {
                 secondColour = "maroon"
             }
         }
-        if (type[k] = "flying") {
+        if (type[k] == "flying") {
             if (k == 0) {
                 firstColour = "lightskyblue"
             }
@@ -36,7 +35,7 @@ function colourChooser (data) {
                 secondColour = "lightskyblue"
             }
         }
-        if (type[k] = "poison") {
+        if (type[k] == "poison") {
             if (k == 0) {
                 firstColour = "darkviolet"
             }
@@ -44,7 +43,7 @@ function colourChooser (data) {
                 secondColour = "darkviolet"
             }
         }
-        if (type[k] = "ground") {
+        if (type[k] == "ground") {
             if (k == 0) {
                 firstColour = "sandybrown"
             }
@@ -52,7 +51,7 @@ function colourChooser (data) {
                 secondColour = "sandybrown"
             }
         }
-        if (type[k] = "rock") {
+        if (type[k] == "rock") {
             if (k == 0) {
                 firstColour = "darkgoldenrod"
             }
@@ -60,7 +59,7 @@ function colourChooser (data) {
                 secondColour = "darkgoldenrod"
             }
         }
-        if (type[k] = "bug") {
+        if (type[k] == "bug") {
             if (k == 0) {
                 firstColour = "olive"
             }
@@ -68,7 +67,7 @@ function colourChooser (data) {
                 secondColour = "olive"
             }
         }
-        if (type[k] = "ghost") {
+        if (type[k] == "ghost") {
             if (k == 0) {
                 firstColour = "rebeccapurple"
             }
@@ -76,7 +75,7 @@ function colourChooser (data) {
                 secondColour = "rebeccapurple"
             }
         }
-        if (type[k] = "steel") {
+        if (type[k] == "steel") {
             if (k == 0) {
                 firstColour = "dimgrey"
             }
@@ -84,7 +83,7 @@ function colourChooser (data) {
                 secondColour = "dimgrey"
             }
         }
-        if (type[k] = "fire") {
+        if (type[k] == "fire") {
             if (k == 0) {
                 firstColour = "orange"
             }
@@ -92,7 +91,7 @@ function colourChooser (data) {
                 secondColour = "orange"
             }
         }
-        if (type[k] = "water") {
+        if (type[k] == "water") {
             if (k == 0) {
                 firstColour = "dodgerblue"
             }
@@ -100,7 +99,7 @@ function colourChooser (data) {
                 secondColour = "dodgerblue"
             }
         }
-        if (type[k] = "grass") {
+        if (type[k] == "grass") {
             if (k == 0) {
                 firstColour = "forestgreen"
             }
@@ -108,7 +107,7 @@ function colourChooser (data) {
                 secondColour = "forestgreen"
             }
         }
-        if (type[k] = "electric") {
+        if (type[k] == "electric") {
             if (k == 0) {
                 firstColour = "yellow"
             }
@@ -116,7 +115,7 @@ function colourChooser (data) {
                 secondColour = "yellow"
             }
         }
-        if (type[k] = "psychic") {
+        if (type[k] == "psychic") {
             if (k == 0) {
                 firstColour = "orchid"
             }
@@ -124,7 +123,7 @@ function colourChooser (data) {
                 secondColour = "orchid"
             }
         }
-        if (type[k] = "ice") {
+        if (type[k] == "ice") {
             if (k == 0) {
                 firstColour = "cyan"
             }
@@ -132,7 +131,7 @@ function colourChooser (data) {
                 secondColour = "cyan"
             }
         }
-        if (type[k] = "dragon") {
+        if (type[k] == "dragon") {
             if (k == 0) {
                 firstColour = "darkviolet"
             }
@@ -140,7 +139,7 @@ function colourChooser (data) {
                 secondColour = "darkviolet"
             }
         }
-        if (type[k] = "fairy") {
+        if (type[k] == "fairy") {
             if (k == 0) {
                 firstColour = "pink"
             }
@@ -150,10 +149,10 @@ function colourChooser (data) {
         }
     }
     if (k == 1) {
-        css_add += firstColour
+        css_add = firstColour
     }
     if (k == 2) {
-        css_add += `lineargradient(${firstColour}, ${secondColour})`
+        css_add = `linear-gradient(${firstColour}, ${secondColour})`
     }
 }
 
@@ -169,7 +168,7 @@ function finishprocessPokeResp(data) {
 }
 
 function processPokeResp(data) {
-    to_add += `<div class="image_container">
+    to_add += `<div class="image_container" id=${i}>
     <a href="/profile/${data.id}">
     <img src="${data.sprites.other["official-artwork"].front_default}">
     </a>
@@ -205,9 +204,14 @@ async function loadRandomPokemon() {
         if (i % 3 == 0) {
             to_add += `</div>`
         }
+        jQuery("main").html(to_add)
+        if (k == 1) {
+            document.getElementById(i).style.backgroundColor = css_add
+        }
+        if (k == 2) {
+            document.getElementById(i).style.backgroundImage = css_add
+        }
     }
-    jQuery("main").html(to_add)
-    jQuery(".image_container").css("background-colour", css_add)
 }
 
 function setup() {
