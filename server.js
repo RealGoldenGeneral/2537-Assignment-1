@@ -10,6 +10,7 @@ app.listen(5000, function (err) {
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/html/index.html')
 })
+const https = require('https')
 
 app.get('/profile/:id', function (req, res) {
     const url = `https://pokeapi.co/api/v2/pokemon/${req.params.id}`
