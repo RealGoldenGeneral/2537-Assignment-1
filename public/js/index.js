@@ -1,6 +1,7 @@
 const { type } = require("express/lib/response")
 
 to_add = ''
+css_add = ''
 
 function colourChooser (data) {
     type = []
@@ -148,6 +149,12 @@ function colourChooser (data) {
             }
         }
     }
+    if (k == 1) {
+        css_add += firstColour
+    }
+    if (k == 2) {
+        css_add += `lineargradient(${firstColour}, ${secondColour})`
+    }
 }
 
 function finishprocessPokeResp(data) {
@@ -200,6 +207,7 @@ async function loadRandomPokemon() {
         }
     }
     jQuery("main").html(to_add)
+    jQuery(".image_container").css("background-colour", css_add)
 }
 
 function setup() {
