@@ -18,8 +18,7 @@ app.get('/profile/:id', function (req, res) {
     https.get(url, function (https_res) {
         https_res.on("data", function (chunk) {
             data += chunk
-        })
-
+            })
         https_res.on("end", function() {
             data = JSON.parse(data)
             res.render("profile.ejs", {
