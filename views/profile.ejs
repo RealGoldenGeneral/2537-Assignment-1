@@ -5,11 +5,20 @@
         <link rel="stylesheet" href="../public/css/profile.css">
     </head>
     <body>
+        <header>
+            <h1><%= name%></h1>
+        </header>
+        <nav>
+            <div>
+                <a>General Information</a>
+                <a>Stats</a>
+            </div>
+            <a>Search</a>
+        </nav>
         <article>
             <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/<%= id %>.png" alt="<%= name%>">
         </article>
         <main>
-            <h3><%= name%></h3>
         </main>
     </body>
 </html>
