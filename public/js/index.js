@@ -139,6 +139,14 @@ function colourChooser (data) {
                 secondColour = "darkviolet"
             }
         }
+        if (type[k] ==  "dark") {
+            if (k == 0) {
+                firstColour = "#705848"
+            }
+            if (k == 1) {
+                secondColour = "#705848"
+            }
+        }
         if (type[k] == "fairy") {
             if (k == 0) {
                 firstColour = "pink"
@@ -149,10 +157,10 @@ function colourChooser (data) {
         }
     }
     if (k == 1) {
-        css_add = firstColour
+        css_add = `"background-color: ${firstColour}"`
     }
     if (k == 2) {
-        css_add = `linear-gradient(${firstColour}, ${secondColour})`
+        css_add = `"background-image: linear-gradient(${firstColour}, ${secondColour})"`
     }
 }
 
@@ -168,7 +176,7 @@ function finishprocessPokeResp(data) {
 }
 
 function processPokeResp(data) {
-    to_add += `<div class="image_container" id=${i}>
+    to_add += `<div class="image_container" style=${css_add}>
     <a href="/profile/${data.id}">
     <img src="${data.sprites.other["official-artwork"].front_default}">
     </a>
@@ -185,6 +193,12 @@ async function loadRandomPokemon() {
 
         await $.ajax({
             type: "GET",
+            url: `https://pokeapi.co/api/v2/pokemon/${x}`,
+            success: colourChooser
+        })
+
+        await $.ajax({
+            type: "GET",
             url: `https://pokeapi.co/api/v2/pokemon/${x}/`,
             success: processPokeResp
         })
@@ -195,23 +209,11 @@ async function loadRandomPokemon() {
             success: finishprocessPokeResp
         })
 
-        await $.ajax({
-            type: "GET",
-            url: `https://pokeapi.co/api/v2/pokemon/${x}`,
-            success: colourChooser
-        })
-
         if (i % 3 == 0) {
             to_add += `</div>`
         }
-        jQuery("main").html(to_add)
-        if (k == 1) {
-            document.getElementById(i).style.backgroundColor = css_add
-        }
-        if (k == 2) {
-            document.getElementById(i).style.backgroundImage = css_add
-        }
     }
+    jQuery("main").html(to_add)
 }
 
 function setup() {
