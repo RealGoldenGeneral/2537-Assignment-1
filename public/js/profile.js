@@ -1,5 +1,78 @@
 to_add = ""
 
+function finishprocessPokeResp(data) {
+    hp = data.stats.filter(function (obj) {
+        return obj.stat.name == "hp"
+    }).map((obj2) =>{
+        return obj2.base_stat
+    })
+
+    attack = data.stats.filter(function (obj) {
+        return obj.stat.name == "attack"
+    }).map((obj2) =>{
+        return obj2.base_stat
+    })
+
+    defense = data.stats.filter(function (obj) {
+        return obj.stat.name == "defense"
+    }).map((obj2) =>{
+        return obj2.base_stat
+    })
+
+    specialAttack = data.stats.filter(function (obj) {
+        return obj.stat.name == "special-attack"
+    }).map((obj2) =>{
+        return obj2.base_stat
+    })
+
+    specialDefense = data.stats.filter(function (obj) {
+        return obj.stat.name == "special-defense"
+    }).map((obj2) =>{
+        return obj2.base_stat
+    })
+
+    speed = data.stats.filter(function (obj) {
+        return obj.stat.name == "speed"
+    }).map((obj2) =>{
+        return obj2.base_stat
+    })
+
+    to_add +=`<div id="stats">
+    <h4>Stats</h4>
+    <div id="progressbars">
+    <label for="hp">HP:</label>
+    <progress id="hp" value="${hp}" max="255">${hp}/255</progress>
+    ${hp}/255
+    </div>
+    <div id="progressbars">
+    <label for="attack">Attack:</label>
+    <progress id="attack" value="${attack}" max="255">${attack}/255</progress>
+    ${attack}/255
+    </div>
+    <div id="progressbars">
+    <label for="defense">Defense:</label>
+    <progress id="defense" value="${defense}" max="255">${defense}/255</progress>
+    ${defense}/255
+    </div>
+    <div id="progressbars">
+    <label for="specialAttack">Special Attack:</label>
+    <progress id="specialAttack" value="${specialAttack}" max="255">${specialAttack}/255</progress>
+    ${specialAttack}/255
+    </div>
+    <div id="progressbars">
+    <label for="specialDefense">Special Defense:</label>
+    <progress id="specialDefense" value="${specialDefense}" max="255">${specialDefense}/255</progress>
+    ${specialDefense}/255
+    </div>
+    <div id="progressbars">
+    <label for="speed">Speed:</label>
+    <progress id="speed" value="${speed}" max="255">${speed}/255</progress>
+    ${speed}/255
+    </div>
+    </div>
+    </div>`
+}
+
 function createHeading(data) {
     to_add += `<h3>#${id} ${data.name}</h3>`
 }
@@ -14,21 +87,18 @@ function processPokeResp(data) {
         if (data.flavor_text_entries[k].language.name == "en" && data.flavor_text_entries[k].version.name == "shield") { // For gen 8 pokemon
             to_add += `<div class="flavour_text">
             <p>${data.flavor_text_entries[k].flavor_text}</p>
-            </div>
             </div>`
             break
         }
         else if (data.flavor_text_entries[k].language.name == "en" && data.flavor_text_entries[k].version.name == "alpha-sapphire") { // For other generations
             to_add += `<div class="flavour_text">
             <p>${data.flavor_text_entries[k].flavor_text}</p>
-            </div>
             </div>`
             break
         }
         else if (data.flavor_text_entries[k].language.name == "en" && data.flavor_text_entries[k].version.name == "ultra-moon") { // For gen 7 pokemon that didn't appear in gen 8
             to_add += `<div class="flavour_text">
             <p>${data.flavor_text_entries[k].flavor_text}</p>
-            </div>
             </div>`
             break
         }
@@ -49,6 +119,12 @@ async function loadPokemonInformation() {
         type: "GET",
         url: `https://pokeapi.co/api/v2/pokemon-species/${idNum}/`,
         success: processPokeResp
+    })
+
+    await $.ajax({
+        type: "GET",
+        url: `https://pokeapi.co/api/v2/pokemon/${idNum}/`,
+        success: finishprocessPokeResp
     })
     $("#information").html(to_add)
 }
