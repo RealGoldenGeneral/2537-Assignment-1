@@ -1,7 +1,7 @@
 to_add = ""
 
 function createHeading(data) {
-    to_add += `<h3>${data.name}</h3>`
+    to_add += `<h3>#${id} ${data.name}</h3>`
 }
 
 function processPokeResp(data) {
