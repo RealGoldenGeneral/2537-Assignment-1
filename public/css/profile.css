@@ -18,6 +18,11 @@ main {
     border-width: 10px;
     background-color: antiquewhite;
 }
+.height_and_weight {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .flavour_text {
     border-radius: 10px;
     border-style: solid;
