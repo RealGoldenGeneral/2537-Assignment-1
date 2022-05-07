@@ -1,6 +1,7 @@
 
 to_add = ''
 css_add = ''
+pokemon_array = ''
 
 function colourChooser (data) {
     type = []
@@ -190,6 +191,14 @@ async function loadRandomPokemon() {
         }
 
         x = Math.floor(Math.random() * 897) + 1
+        pokemon_array[i] = x
+
+        for (m = 1; m <= 9; m++) {
+            if (x == pokemon_array[i]) {
+                x = Math.floor(Math.random() * 897) + 1
+                pokemon_array[i] = x
+            }
+        }
 
         await $.ajax({
             type: "GET",
