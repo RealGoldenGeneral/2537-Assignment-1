@@ -1,3 +1,5 @@
+to_add = ""
+
 function processPokeResp(data) {
     for (j = 0; j < data.genera.length; j++) {
         if (data.genera[j].language.name == "en") {
@@ -5,23 +7,40 @@ function processPokeResp(data) {
         }
     }
     for (k = 0; k < data.flavor_text_entries.length; k++) {
-        if (data.flavor_text_entries[k].lanuage.name == "en") {
+        if (data.flavor_text_entries[k].language.name == "en" && data.flavor_text_entries[k].version.name == "shield") { // For gen 8 pokemon
             to_add += `<div class="flavor_text">
-            <p>${data.flavor_text_entries.flavor_text}</p>
+            <p>${data.flavor_text_entries[k].flavor_text}</p>
             </div>
             </div>`
+            break
+        }
+        else if (data.flavor_text_entries[k].language.name == "en" && data.flavor_text_entries[k].version.name == "alpha-sapphire") { // For other generations
+            to_add += `<div class="flavor_text">
+            <p>${data.flavor_text_entries[k].flavor_text}</p>
+            </div>
+            </div>`
+            break
+        }
+        else if (data.flavor_text_entries[k].language.name == "en" && data.flavor_text_entries[k].version.name == "ultra-moon") { // For gen 7 pokemon that didn't appear in gen 8
+            to_add += `<div class="flavor_text">
+            <p>${data.flavor_text_entries[k].flavor_text}</p>
+            </div>
+            </div>`
+            break
         }
     }
 }
 
 async function loadPokemonInformation() {
-    id = $(span).text();
+    id = $("#pokeid").text();
+    idNum = parseInt(id);
 
     await $.ajax({
         type: "GET",
-        url: `https://pokeapi.co/api/v2/pokemon-species/${x}/`,
-        success: processPokeResp()
+        url: `https://pokeapi.co/api/v2/pokemon-species/${idNum}/`,
+        success: processPokeResp
     })
+    $("#information").html(to_add)
 }
 
 function setup() {

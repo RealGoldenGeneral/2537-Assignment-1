@@ -2,7 +2,7 @@
 <html>
     <head>
         <title><%= name%></title>
-        <link rel="stylesheet" href="../public/css/profile.css">
+        <link rel="stylesheet" href="../css/profile.css">
     </head>
     <body>
         <header>
@@ -23,12 +23,12 @@
                     <span><%= weight%> hg</span>
                 </div>
             </article>
-            <div>
-                <span><%= id%></span>
+            <div id="information">
+                <span id="pokeid"><%= id%></span>
                 <h3><%= name%></h3>
             </div>
         </main>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="../public/js/profile.js"></script>
+        <script src="../js/profile.js"></script>
     </body>
 </html>
