@@ -1,5 +1,9 @@
 to_add = ""
 
+function createHeading(data) {
+    to_add += `<h3>${data.name}</h3>`
+}
+
 function processPokeResp(data) {
     for (j = 0; j < data.genera.length; j++) {
         if (data.genera[j].language.name == "en") {
@@ -34,6 +38,12 @@ function processPokeResp(data) {
 async function loadPokemonInformation() {
     id = $("#pokeid").text();
     idNum = parseInt(id);
+
+    await $.ajax({
+        type: "GET",
+        url: `https://pokeapi.co/api/v2/pokemon/${idNum}/`,
+        success: createHeading
+    })
 
     await $.ajax({
         type: "GET",
