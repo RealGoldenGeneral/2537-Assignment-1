@@ -194,9 +194,9 @@ async function loadRandomPokemon() {
         pokemon_array[i] = x
 
         for (m = 1; m <= 9; m++) {
-            if (x == pokemon_array[i]) {
+            if (x == pokemon_array[m]) {
                 x = Math.floor(Math.random() * 897) + 1
-                pokemon_array[i] = x
+                pokemon_array[m] = x
             }
         }
 
