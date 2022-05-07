@@ -1,7 +1,7 @@
 
 to_add = ''
 css_add = ''
-pokemon_array = ''
+pokemon_array = []
 
 function colourChooser (data) {
     type = []
