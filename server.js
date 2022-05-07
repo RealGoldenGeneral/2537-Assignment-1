@@ -21,12 +21,28 @@ app.get('/profile/:id', function (req, res) {
             })
         https_res.on("end", function() {
             data = JSON.parse(data)
-            res.render("profile.ejs", {
-                "id": req.params.id,
-                "name": data.name,
-                "height": data.height,
-                "weight": data.weight
-            })
+            abilities = data.abilities
+            if (abilities.length == 3) {
+                res.render("profile.ejs", {
+                    "id": req.params.id,
+                    "name": data.name,
+                    "height": data.height,
+                    "weight": data.weight,
+                    "ability1": abilities[0].ability.name,
+                    "ability2": abilities[1].ability.name,
+                    "ability3": abilities[2].ability.name
+                })
+            } else if (abilities.length == 2) {
+                res.render("profile.ejs", {
+                    "id": req.params.id,
+                    "name": data.name,
+                    "height": data.height,
+                    "weight": data.weight,
+                    "ability1": abilities[0].ability.name,
+                    "ability2": abilities[1].ability.name,
+                    "ability3": ""
+                })
+            }
         })
     })
 })
