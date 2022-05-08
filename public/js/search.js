@@ -259,6 +259,7 @@ function displayAbility(checked) {
     if (checked == "on") {
         $("#name").val("")
         $("#type").val("")
+        $("select").css("display", "none")
         $("#search").css("display", "inline")
         getName($("#search").val())
 
@@ -273,6 +274,7 @@ function displayName(checked) {
     if (checked == "on") {
         $("#type").val("")
         $("#ability").val("")
+        $("select").css("display", "none")
         $("#search").css("display", "inline")
         getName($("#search").val())
 
@@ -288,6 +290,7 @@ function displayType(checked) {
         $("#name").val("")
         $("#ability").val("")
         $("select").css("display", "inline")
+        $("#search").css("display", "none")
         getType($("#poke_type option:selected").val())
 
         $(document).on('change', '#poke_type', () => {
