@@ -216,6 +216,33 @@ async function getPokemon(data) {
     $("main").html(to_add)
 }
 
+function getAbility(ability_) {
+    $("main").empty()
+    to_add = ''
+    css_add = ''
+    $.ajax({
+        type: "get",
+        url: `https://pokeapi.co/api/v2/ability/${ability_}`,
+        success: getPokemon
+    })
+}
+
+function getName(name_) {
+    $("main").empty()
+    to_add = ''
+    css_add = ''
+    $.ajax({
+        type: "get",
+        url: `https://pokeapi.co/api/v2/pokemon/${name_}`,
+        success: colourChooser
+    })
+    $.ajax({
+        type: "get",
+        url: `https://pokeapi.co/api/v2/pokemon/${name_}`,
+        success: displayPokemon
+    })
+}
+
 function getType(type_) {
     $("main").empty()
     to_add = ''
@@ -227,9 +254,39 @@ function getType(type_) {
     })
 }
 
+function displayAbility(checked) {
+    if (checked == "on") {
+        $("#name").val("")
+        $("#type").val("")
+        $("input[type:text]").css("display", "inline")
+        getName($("#search").val())
+
+        $(document).on ('change', '#search', () => {
+            poke_name = $(("#search").val())
+            getAbility($("#search").val())
+        })
+    }
+}
+
+function displayName(checked) {
+    if (checked == "on") {
+        $("#type").val("")
+        $("#ability").val("")
+        $("input[type:text]").css("display", "inline")
+        getName($("#search").val())
+
+        $(document).on ('change', '#search', () => {
+            poke_name = $(("#search").val())
+            getName($("#search").val())
+        })
+    }
+}
+
 function displayType(checked) {
     if (checked == "on") {
-        $("select").css("display", "block")
+        $("#name").val("")
+        $("#ability").val("")
+        $("select").css("display", "inline")
         getType($("#poke_type option:selected").val())
 
         $(document).on('change', '#poke_type', () => {
@@ -241,9 +298,14 @@ function displayType(checked) {
 
 function setup() {
     displayType($("#type:checked").val())
+    displayName($("#name:checked").val())
     $("#type").change(() => {
-        checked = $("#type:checked").val();
+        nameChecked = $("#type:checked").val();
         displayType($("#type:checked").val())
+    })
+    $("#name").change(() => {
+        nameChecked = $("#name:checked").val();
+        displayName($("#name:checked").val())
     })
 }
 
