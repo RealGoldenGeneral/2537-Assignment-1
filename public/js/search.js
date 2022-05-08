@@ -256,39 +256,55 @@ function getType(type_) {
 }
 
 function displayAbility(checked) {
-    if (checked == "on") {
-        $("#name").val("")
-        $("#type").val("")
+    if (checked == true) {
+        $("#name").prop("checked", false)
+        $("#type").prop("checked", false)
         $("select").css("display", "none")
         $("#search").css("display", "inline")
         getName($("#search").val())
 
         $(document).on ('input', () => {
-            poke_name = $("#search").val()
-            getAbility($("#search").val())
+            poke_name = $("#search").prop();
+            getAbility($("#search").prop())
+        })
+        $("#name").change(() => {
+            nameChecked = $("#name").prop("checked");
+            displayName($("#name").prop("checked"))
+        })
+        $("#type").change(() => {
+            typeChecked = $("#type").prop("checked");
+            displayType($("#type").prop("checked"))
         })
     }
 }
 
 function displayName(checked) {
-    if (checked == "on") {
-        $("#type").val("")
-        $("#ability").val("")
+    if (checked == true) {
+        $("#type").prop("checked", false)
+        $("#ability").prop("checked", false)
         $("select").css("display", "none")
         $("#search").css("display", "inline")
         getName($("#search").val())
 
         $(document).on('input', () => {
-            poke_name = $("#search").val()
-            getName($("#search").val())
+            poke_name = $("#search").prop();
+            getName($("#search").prop())
+        })
+        $("#type").change(() => {
+            typeChecked = $("#type").prop("checked");
+            displayType($("#type").prop("checked"))
+        })
+        $("#ability").change(() => {
+            abilityChecked = $("#ability").prop("checked");
+            displayAbility($("#ability").prop("checked"))
         })
     }
 }
 
 function displayType(checked) {
-    if (checked == "on") {
-        $("#name").val("")
-        $("#ability").val("")
+    if (checked == true) {
+        $("#name").prop("checked", false)
+        $("#ability").prop("checked", false)
         $("select").css("display", "inline")
         $("label").css("display", "none")
         $("#search").css("display", "none")
@@ -298,23 +314,32 @@ function displayType(checked) {
             poke_type = $("#poke_type option:selected").val();
             getType($("#poke_type option:selected").val())
         })
+        $("#name").change(() => {
+            nameChecked = $("#name").prop("checked");
+            displayName($("#name").prop("checked"))
+        })
+        $("#ability").change(() => {
+            abilityChecked = $("#ability").prop("checked");
+            displayAbility($("#ability").prop("checked"))
+        })
     }
 }
 
 function setup() {
-    displayType($("#type:checked").val())
-    displayName($("#name:checked").val())
+    displayType($("#type").prop("checked"))
+    displayName($("#name").prop("checked"))
+    displayAbility($("#ability").prop("checked"))
     $("#type").change(() => {
-        nameChecked = $("#type:checked").val();
-        displayType($("#type:checked").val())
+        nameChecked = $("#type").prop("checked");
+        displayType($("#type").prop("checked"))
     })
     $("#name").change(() => {
-        nameChecked = $("#name:checked").val();
-        displayName($("#name:checked").val())
+        nameChecked = $("#name").prop("checked");
+        displayName($("#name").prop("checked"))
     })
     $("#ability").change(() => {
-        abilityChecked = $("#ability:checked").val();
-        displayAbility($("#ability:checked").val())
+        abilityChecked = $("#ability").prop("checked");
+        displayAbility($("#ability").prop("checked"))
     })
 }
 
