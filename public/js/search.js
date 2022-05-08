@@ -168,7 +168,7 @@ function colourChooser(data) {
 async function finishDisplayingPokemon(data) {
     for (j = 0; j < data.genera.length; j++) {
         if (data.genera[j].language.name == "en") {
-            to_add += await `<p>
+            to_add += `<p>
             ${data.genera[j].genus}
             </p>
             </div>`
@@ -178,7 +178,7 @@ async function finishDisplayingPokemon(data) {
 
 async function displayPokemon(data) {
     if (data.id < 899) {
-        to_add +=  await `<div class="image_container" style=${css_add}>
+        to_add += `<div class="image_container" style=${css_add}>
     <a href="/profile/${data.id}">
     <img src="${data.sprites.other["official-artwork"].front_default}">
     </a>
@@ -195,7 +195,7 @@ async function displayPokemon(data) {
 async function getPokemon(data) {
     for (i = 0; i < data.pokemon.length; i++) {
         if (i % 3 == 0) {
-            to_add += await `<div class="images_group">`
+            to_add += `<div class="images_group">`
         }
        await $.ajax({
             type: "get",
