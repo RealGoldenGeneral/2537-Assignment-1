@@ -47,4 +47,8 @@ app.get('/profile/:id', function (req, res) {
     })
 })
 
+app.get('/search', function (req, res) {
+    res.sendFile(__dirname + '/public/html/search.html')
+})
+
 app.use(express.static("./public"))
