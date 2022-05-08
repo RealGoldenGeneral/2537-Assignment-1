@@ -210,7 +210,7 @@ async function getPokemon(data) {
         })
 
         if (i % 3 == 2) {
-            to_add += await `</div>`
+            to_add += `</div>`
         }
     }
     $("main").html(to_add)
