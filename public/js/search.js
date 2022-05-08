@@ -1,5 +1,6 @@
 to_add = ''
 css_add = ''
+id = ''
 
 function colourChooser(data) {
     type = []
@@ -183,13 +184,8 @@ async function displayPokemon(data) {
     <img src="${data.sprites.other["official-artwork"].front_default}">
     </a>
     <h4>${data.name}</h4>`
-
-       await $.ajax({
-            type: "get",
-            url: `https://pokeapi.co/api/v2/pokemon-species/${data.id}`,
-            success: finishDisplayingPokemon
-        })
     }
+    id = data.id
 }
 
 async function getPokemon(data) {
@@ -197,17 +193,24 @@ async function getPokemon(data) {
         if (i % 3 == 0) {
             to_add += `<div class="images_group">`
         }
-       await $.ajax({
+        await $.ajax({
             type: "get",
             url: data.pokemon[i].pokemon.url,
             success: colourChooser
         })
 
-       await $.ajax({
+        await $.ajax({
             type: "get",
             url: data.pokemon[i].pokemon.url,
             success: displayPokemon
         })
+        if (id < 899) {
+            await $.ajax({
+                type: "get",
+                url: `https://pokeapi.co/api/v2/pokemon-species/${id}`,
+                success: finishDisplayingPokemon
+            })
+        }
 
         if (i % 3 == 2) {
             to_add += `</div>`
@@ -241,6 +244,13 @@ async function getName(name_) {
         url: `https://pokeapi.co/api/v2/pokemon/${name_}`,
         success: displayPokemon
     })
+    if (id < 899) {
+        await $.ajax({
+            type: "get",
+            url: `https://pokeapi.co/api/v2/pokemon-species/${id}`,
+            success: finishDisplayingPokemon
+        })
+    }
     $("main").html(to_add);
 }
 
@@ -263,7 +273,7 @@ function displayAbility(checked) {
         $("#search").css("display", "inline")
         getName($("#search").val())
 
-        $(document).on ('input', () => {
+        $(document).on('input', () => {
             poke_name = $("#search").prop();
             getAbility($("#search").prop())
         })
