@@ -290,6 +290,7 @@ function displayType(checked) {
         $("#name").val("")
         $("#ability").val("")
         $("select").css("display", "inline")
+        $("label").css("display", "none")
         $("#search").css("display", "none")
         getType($("#poke_type option:selected").val())
 
