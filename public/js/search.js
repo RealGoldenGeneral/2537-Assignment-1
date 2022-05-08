@@ -227,20 +227,21 @@ function getAbility(ability_) {
     })
 }
 
-function getName(name_) {
+async function getName(name_) {
     $("main").empty()
     to_add = ''
     css_add = ''
-    $.ajax({
+    await $.ajax({
         type: "get",
         url: `https://pokeapi.co/api/v2/pokemon/${name_}`,
         success: colourChooser
     })
-    $.ajax({
+    await $.ajax({
         type: "get",
         url: `https://pokeapi.co/api/v2/pokemon/${name_}`,
         success: displayPokemon
     })
+    $("main").html(to_add);
 }
 
 function getType(type_) {
@@ -258,11 +259,11 @@ function displayAbility(checked) {
     if (checked == "on") {
         $("#name").val("")
         $("#type").val("")
-        $("input[type:text]").css("display", "inline")
+        $("#search").css("display", "inline")
         getName($("#search").val())
 
-        $(document).on ('change', '#search', () => {
-            poke_name = $(("#search").val())
+        $(document).on ('input', () => {
+            poke_name = $("#search").val()
             getAbility($("#search").val())
         })
     }
@@ -272,11 +273,11 @@ function displayName(checked) {
     if (checked == "on") {
         $("#type").val("")
         $("#ability").val("")
-        $("input[type:text]").css("display", "inline")
+        $("#search").css("display", "inline")
         getName($("#search").val())
 
-        $(document).on ('change', '#search', () => {
-            poke_name = $(("#search").val())
+        $(document).on('input', () => {
+            poke_name = $("#search").val()
             getName($("#search").val())
         })
     }
@@ -306,6 +307,10 @@ function setup() {
     $("#name").change(() => {
         nameChecked = $("#name:checked").val();
         displayName($("#name:checked").val())
+    })
+    $("#ability").change(() => {
+        abilityChecked = $("#ability:checked").val();
+        displayAbility($("#ability:checked").val())
     })
 }
 
