@@ -220,7 +220,7 @@ async function getPokemon(data) {
     $("main").html(to_add)
 }
 
-await function getAbility(ability_) {
+async function getAbility(ability_) {
     $("main").empty()
     to_add = ''
     css_add = ''
