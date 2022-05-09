@@ -270,6 +270,7 @@ function displayAbility(checked) {
         $("#name").prop("checked", false)
         $("#type").prop("checked", false)
         $("select").css("display", "none")
+        $("#pokeLabel").css("display", "none")
         $("#search").css("display", "inline")
         getName($("#search").val())
 
@@ -293,6 +294,7 @@ function displayName(checked) {
         $("#type").prop("checked", false)
         $("#ability").prop("checked", false)
         $("select").css("display", "none")
+        $("#pokeLabel").css("display", "none")
         $("#search").css("display", "inline")
         getName($("#search").val())
 
@@ -316,7 +318,7 @@ function displayType(checked) {
         $("#name").prop("checked", false)
         $("#ability").prop("checked", false)
         $("select").css("display", "inline")
-        $("label").css("display", "none")
+        $("#searchLabel").css("display", "none")
         $("#search").css("display", "none")
         getType($("#poke_type option:selected").val())
 
