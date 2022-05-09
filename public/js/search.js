@@ -220,7 +220,7 @@ async function getPokemon(data) {
     $("main").html(to_add)
 }
 
-function getAbility(ability_) {
+await function getAbility(ability_) {
     $("main").empty()
     to_add = ''
     css_add = ''
@@ -230,7 +230,7 @@ function getAbility(ability_) {
         success: setName
     })
     if (name_g != '') {
-        $.ajax({
+        await $.ajax({
             type: "get",
             url: `https://pokeapi.co/api/v2/ability/${ability_}`,
             success: getPokemon
