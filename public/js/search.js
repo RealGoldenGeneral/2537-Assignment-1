@@ -275,7 +275,7 @@ function displayAbility(checked) {
         $("#search").css("display", "inline")
         getName($("#search").val())
 
-        $(document).on('input', () => {
+        $('#submit').on('click', () => {
             poke_name = $("#search").val();
             getAbility($("#search").val())
         })
@@ -292,7 +292,7 @@ function displayName(checked) {
         $("#search").css("display", "inline")
         getName($("#search").val())
 
-        $(document).on('input', () => {
+        $('#submit').on('click', () => {
             poke_name = $("#search").val();
             getName($("#search").val())
         })
