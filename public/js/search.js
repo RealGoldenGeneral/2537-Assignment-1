@@ -236,11 +236,6 @@ async function getName(name_) {
     css_add = ''
     await $.ajax({
         type: "get",
-        url: "https://pokeapi.co/api/v2/pokemon/",
-        success: setName
-    })
-    await $.ajax({
-        type: "get",
         url: `https://pokeapi.co/api/v2/pokemon/${name_}`,
         success: colourChooser
     })
@@ -281,8 +276,8 @@ function displayAbility(checked) {
         getName($("#search").val())
 
         $(document).on('input', () => {
-            poke_name = $("#search").prop();
-            getAbility($("#search").prop())
+            poke_name = $("#search").val();
+            getAbility($("#search").val())
         })
         $("#name").change(() => {
             nameChecked = $("#name").prop("checked");
