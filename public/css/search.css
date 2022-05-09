@@ -2,6 +2,11 @@ html {
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
+#pokeLabel, #poke_type, #searchLabel, #search {
+    display: none;
+}
+
 body {
     margin: 0px;
 }
