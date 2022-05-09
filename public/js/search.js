@@ -1,6 +1,7 @@
 to_add = ''
 css_add = ''
 id = ''
+name_g = ''
 
 function colourChooser(data) {
     type = []
@@ -223,11 +224,26 @@ function getAbility(ability_) {
     $("main").empty()
     to_add = ''
     css_add = ''
-    $.ajax({
+    await $.ajax({
         type: "get",
-        url: `https://pokeapi.co/api/v2/ability/${ability_}`,
-        success: getPokemon
+        url: "https://pokeapi.co/api/v2/ability/",
+        success: setName
     })
+    if (name_g != '') {
+        $.ajax({
+            type: "get",
+            url: `https://pokeapi.co/api/v2/ability/${ability_}`,
+            success: getPokemon
+        })
+    }
+}
+
+function setName(data) {
+    for (m = 0; m < data.results.length; m = 0) {
+        if (data.results[m].name == poke_name) {
+            name_g = poke_name
+        }
+    }
 }
 
 async function getName(name_) {
@@ -236,22 +252,29 @@ async function getName(name_) {
     css_add = ''
     await $.ajax({
         type: "get",
-        url: `https://pokeapi.co/api/v2/pokemon/${name_}`,
-        success: colourChooser
+        url: "https://pokeapi.co/api/v2/pokemon/",
+        success: setName
     })
-    await $.ajax({
-        type: "get",
-        url: `https://pokeapi.co/api/v2/pokemon/${name_}`,
-        success: displayPokemon
-    })
-    if (id < 899) {
+    if (name_g != '') {
         await $.ajax({
             type: "get",
-            url: `https://pokeapi.co/api/v2/pokemon-species/${id}`,
-            success: finishDisplayingPokemon
+            url: `https://pokeapi.co/api/v2/pokemon/${name_}`,
+            success: colourChooser
         })
+        await $.ajax({
+            type: "get",
+            url: `https://pokeapi.co/api/v2/pokemon/${name_}`,
+            success: displayPokemon
+        })
+        if (id < 899) {
+            await $.ajax({
+                type: "get",
+                url: `https://pokeapi.co/api/v2/pokemon-species/${id}`,
+                success: finishDisplayingPokemon
+            })
+        }
+        $("main").html(to_add);
     }
-    $("main").html(to_add);
 }
 
 function getType(type_) {
