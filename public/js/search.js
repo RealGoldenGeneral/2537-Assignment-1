@@ -271,6 +271,7 @@ function displayAbility(checked) {
         $("#type").prop("checked", false)
         $("select").css("display", "none")
         $("#pokeLabel").css("display", "none")
+        $("#searchLabel").css("display", "block")
         $("#search").css("display", "inline")
         getName($("#search").val())
 
@@ -295,12 +296,13 @@ function displayName(checked) {
         $("#ability").prop("checked", false)
         $("select").css("display", "none")
         $("#pokeLabel").css("display", "none")
+        $("#searchLabel").css("display", "block")
         $("#search").css("display", "inline")
         getName($("#search").val())
 
         $(document).on('input', () => {
-            poke_name = $("#search").prop();
-            getName($("#search").prop())
+            poke_name = $("#search").val();
+            getName($("#search").val())
         })
         $("#type").change(() => {
             typeChecked = $("#type").prop("checked");
@@ -317,6 +319,7 @@ function displayType(checked) {
     if (checked == true) {
         $("#name").prop("checked", false)
         $("#ability").prop("checked", false)
+        $("#pokeLabel").css("display", "block")
         $("select").css("display", "inline")
         $("#searchLabel").css("display", "none")
         $("#search").css("display", "none")
