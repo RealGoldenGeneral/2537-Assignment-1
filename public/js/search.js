@@ -279,14 +279,6 @@ function displayAbility(checked) {
             poke_name = $("#search").val();
             getAbility($("#search").val())
         })
-        $("#name").change(() => {
-            nameChecked = $("#name").prop("checked");
-            displayName($("#name").prop("checked"))
-        })
-        $("#type").change(() => {
-            typeChecked = $("#type").prop("checked");
-            displayType($("#type").prop("checked"))
-        })
     }
 }
 
@@ -303,14 +295,6 @@ function displayName(checked) {
         $(document).on('input', () => {
             poke_name = $("#search").val();
             getName($("#search").val())
-        })
-        $("#type").change(() => {
-            typeChecked = $("#type").prop("checked");
-            displayType($("#type").prop("checked"))
-        })
-        $("#ability").change(() => {
-            abilityChecked = $("#ability").prop("checked");
-            displayAbility($("#ability").prop("checked"))
         })
     }
 }
@@ -329,32 +313,24 @@ function displayType(checked) {
             poke_type = $("#poke_type option:selected").val();
             getType($("#poke_type option:selected").val())
         })
-        $("#name").change(() => {
-            nameChecked = $("#name").prop("checked");
-            displayName($("#name").prop("checked"))
-        })
-        $("#ability").change(() => {
-            abilityChecked = $("#ability").prop("checked");
-            displayAbility($("#ability").prop("checked"))
-        })
     }
 }
 
 function setup() {
-    displayType($("#type").prop("checked"))
-    displayName($("#name").prop("checked"))
-    displayAbility($("#ability").prop("checked"))
-    $("#type").change(() => {
+    $("#type").click(() => {
         nameChecked = $("#type").prop("checked");
         displayType($("#type").prop("checked"))
+        $("#type").off("click")
     })
-    $("#name").change(() => {
+    $("#name").click(() => {
         nameChecked = $("#name").prop("checked");
         displayName($("#name").prop("checked"))
+        $("#name").off("click")
     })
-    $("#ability").change(() => {
+    $("#ability").click(() => {
         abilityChecked = $("#ability").prop("checked");
         displayAbility($("#ability").prop("checked"))
+        $("#ability").off("click")
     })
 }
 
