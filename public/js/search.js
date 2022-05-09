@@ -273,6 +273,7 @@ function displayAbility(checked) {
         $("#pokeLabel").css("display", "none")
         $("#searchLabel").css("display", "block")
         $("#search").css("display", "inline")
+        $("#submit").css("display", "inline")
         getName($("#search").val())
 
         $('#submit').on('click', () => {
@@ -290,6 +291,7 @@ function displayName(checked) {
         $("#pokeLabel").css("display", "none")
         $("#searchLabel").css("display", "block")
         $("#search").css("display", "inline")
+        $("#submit").css("display", "inline")
         getName($("#search").val())
 
         $('#submit').on('click', () => {
@@ -307,6 +309,7 @@ function displayType(checked) {
         $("select").css("display", "inline")
         $("#searchLabel").css("display", "none")
         $("#search").css("display", "none")
+        $("#submit").css("display", "none")
         getType($("#poke_type option:selected").val())
 
         $(document).on('change', '#poke_type', () => {

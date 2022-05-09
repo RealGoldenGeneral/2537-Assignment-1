@@ -3,7 +3,7 @@ html {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#pokeLabel, #poke_type, #searchLabel, #search {
+#pokeLabel, #poke_type, #searchLabel, #search, #submit {
     display: none;
 }
 
