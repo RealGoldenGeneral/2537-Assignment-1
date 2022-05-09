@@ -7,9 +7,13 @@ body {
 }
 main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     gap: 10px;
+}
+.image_group {
+    display: flex;
+    flex-direction: row;
 }
 .image_container {
     border-radius: 10px;
