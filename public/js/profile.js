@@ -111,19 +111,19 @@ async function loadPokemonInformation() {
 
     await $.ajax({
         type: "GET",
-        url: `https://pokeapi.co/api/v2/pokemon/${idNum}/`,
+        url: `../pikachu.json`,
         success: createHeading
     })
 
     await $.ajax({
         type: "GET",
-        url: `https://pokeapi.co/api/v2/pokemon-species/${idNum}/`,
+        url: `../pikachu-species.json`,
         success: processPokeResp
     })
 
     await $.ajax({
         type: "GET",
-        url: `https://pokeapi.co/api/v2/pokemon/${idNum}/`,
+        url: `../pikachu.json`,
         success: finishprocessPokeResp
     })
     $("#information").html(to_add)
