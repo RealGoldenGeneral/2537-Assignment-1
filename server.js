@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
 app.set('view engine', 'ejs');
 
 app.listen(process.env.PORT || 5000, function (err) {
