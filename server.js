@@ -48,6 +48,14 @@ app.get('/profile/:id', function (req, res) {
     })
 })
 
+mongoose.connect("mongodb://localhost:27107/timeline", 
+{useNewUrlParser: true, useUnifiedTopology: true });
+const eventSchema = new mongoose.Schema({
+    eventDescription: String,
+    time: String
+});
+const timelineModel = mongoose.model("timeline", eventSchema);
+
 app.get('/search', function (req, res) {
     res.sendFile(__dirname + '/public/html/search.html')
 })
