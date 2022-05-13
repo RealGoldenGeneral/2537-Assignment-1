@@ -11,6 +11,7 @@ function registerClick(name) {
         type: "put",
         data: {
             eventDescription: `User has clicked on ${name}'s profile.`,
+            hits: 1,
             time: `At ${time}.`
         },
         success: ()=> console.log("Event added successfully.")
