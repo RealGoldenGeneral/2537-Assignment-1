@@ -127,6 +127,8 @@ async function loadPokemonInformation() {
         success: finishprocessPokeResp
     })
     $("#information").html(to_add)
+    poke_name = $("h3").text();
+    addData(poke_name);
 }
 
 function addData(name) {
@@ -146,8 +148,6 @@ function addData(name) {
 
 function setup() {
     loadPokemonInformation();
-    poke_name = $("h3").text();
-    addData(poke_name);
 }
 
 $(document).ready(setup)
