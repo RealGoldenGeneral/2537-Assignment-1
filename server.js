@@ -123,6 +123,10 @@ app.use(bodyparser.urlencoded({
     extended: true
 }))
 
+app.get('/history', function (req, res) {
+    res.sendFile(__dirname, "/public/html/timeline.html")
+})
+
 app.get('/timeline', function (req, res) {
     timelineModel.find({}, function (err, logs) {
         if (err) {
@@ -132,7 +136,6 @@ app.get('/timeline', function (req, res) {
         }
         res.send(JSON.stringify(logs));
     })
-    res.sendFile(__dirname + '/public/html/timeline.html')
 })
 
 app.get('/search', function (req, res) {
