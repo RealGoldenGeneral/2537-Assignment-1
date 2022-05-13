@@ -136,7 +136,7 @@ function addData(name) {
         url: "/timeline/insert",
         type: "put",
         data: {
-            eventDescription: `User has searched for pokemon with the ability ${name}.`,
+            eventDescription: `User has clicked on ${name}'s profile.`,
             hits: 1,
             time: `At ${time}.`
         },
@@ -146,8 +146,8 @@ function addData(name) {
 
 function setup() {
     loadPokemonInformation();
-    name = $("h3").text();
-    addData(name);
+    poke_name = $("h3").text();
+    addData(poke_name);
 }
 
 $(document).ready(setup)
