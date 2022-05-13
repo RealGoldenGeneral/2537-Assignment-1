@@ -52,6 +52,7 @@ mongoose.connect("mongodb://localhost:27107/timeline",
 {useNewUrlParser: true, useUnifiedTopology: true });
 const eventSchema = new mongoose.Schema({
     eventDescription: String,
+    hits: Number,
     time: String
 });
 const timelineModel = mongoose.model("timeline", eventSchema);
