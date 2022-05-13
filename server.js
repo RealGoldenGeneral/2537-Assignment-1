@@ -17,7 +17,6 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/html/index.html')
 })
 const https = require('https');
-const res = require('express/lib/response');
 
 app.get('/profile/:id', function (req, res) {
     const url = `https://pokeapi.co/api/v2/pokemon/${req.params.id}`
