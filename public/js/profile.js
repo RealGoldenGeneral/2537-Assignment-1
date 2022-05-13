@@ -146,7 +146,7 @@ function addData(name) {
 
 function setup() {
     loadPokemonInformation();
-    name = $("title").text();
+    name = $("h3").text();
     addData(name);
 }
 
