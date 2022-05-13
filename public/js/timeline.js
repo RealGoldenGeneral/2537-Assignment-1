@@ -27,7 +27,7 @@ function increaseHits() {
 }
 
 function deleteElements() {
-    x = this._id
+    x = $(".like").attr("id")
     $.ajax({
         url: `https://polar-refuge-74063.herokuapp.com/timeline/delete/${x}`,
         type: "get",
