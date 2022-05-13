@@ -265,6 +265,21 @@ function getType(type_) {
     })
 }
 
+function registerAbilitySearch(ability) {
+    date = new Date()
+    time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    $.ajax({
+        url: "/timeline/insert",
+        type: "put",
+        data: {
+            eventDescription: `User has searched for pokemon with the ability ${ability}.`,
+            hits: 1,
+            time: `At ${time}.`
+        },
+        success: ()=> console.log("Event added successfully.")
+    })
+}
+
 function displayAbility(checked) {
     if (checked == true) {
         $("#name").prop("checked", false)
@@ -277,10 +292,26 @@ function displayAbility(checked) {
         getName($("#search").val())
 
         $('#submit').on('click', () => {
-            poke_name = $("#search").val();
+            poke_ability = $("#search").val();
+            registerAbilitySearch(poke_ability);
             getAbility($("#search").val())
         })
     }
+}
+
+function registerNameSearch(name) {
+    date = new Date()
+    time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    $.ajax({
+        url: "/timeline/insert",
+        type: "put",
+        data: {
+            eventDescription: `User has searched for ${name}.`,
+            hits: 1,
+            time: `At ${time}.`
+        },
+        success: ()=> console.log("Event added successfully.")
+    })
 }
 
 function displayName(checked) {
@@ -296,9 +327,25 @@ function displayName(checked) {
 
         $('#submit').on('click', () => {
             poke_name = $("#search").val();
+            registerNameSearch(poke_name);
             getName($("#search").val())
         })
     }
+}
+
+function registerTypeSearch(poke_type) {
+    date = new Date()
+    time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    $.ajax({
+        url: "/timeline/insert",
+        type: "put",
+        data: {
+            eventDescription: `User has searched for ${poke_type} type pokemon.`,
+            hits: 1,
+            time: `At ${time}.`
+        },
+        success: ()=> console.log("Event added successfully.")
+    })
 }
 
 function displayType(checked) {
@@ -314,6 +361,7 @@ function displayType(checked) {
 
         $(document).on('change', '#poke_type', () => {
             poke_type = $("#poke_type option:selected").val();
+            registerTypeSearch(poke_type);
             getType($("#poke_type option:selected").val())
         })
     }
