@@ -16,7 +16,8 @@ app.use(bodyparser.urlencoded({
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/html/index.html')
 })
-const https = require('https')
+const https = require('https');
+const res = require('express/lib/response');
 
 app.get('/profile/:id', function (req, res) {
     const url = `https://pokeapi.co/api/v2/pokemon/${req.params.id}`
@@ -61,6 +62,17 @@ const eventSchema = new mongoose.Schema({
     time: String
 });
 const timelineModel = mongoose.model("timeline", eventSchema);
+
+app.get('/timeline', function (req, res) {
+    timelineModel.find({}, function (err, logs) {
+        if (err) {
+            console.log("Error: " + err);
+        } else {
+            console.log("Data: " + JSON.stringify(logs))
+        }
+        res.send(JSON.stringify(logs));
+    })
+})
 
 
 app.get('/timeline/getAllEvents', function (req, res) {
