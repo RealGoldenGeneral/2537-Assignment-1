@@ -49,7 +49,7 @@ app.get('/profile/:id', function (req, res) {
     })
 })
 
-mongoose.connect("mongodb+srv://NickyCheng:<password>@cluster0.v0ltm.mongodb.net/timeline?retryWrites=true&w=majority", 
+mongoose.connect("mongodb+srv://NickyCheng:s4P6M6uqC57FSNOh@cluster0.v0ltm.mongodb.net/timeline?retryWrites=true&w=majority", 
 {useNewUrlParser: true, useUnifiedTopology: true });
 const eventSchema = new mongoose.Schema({
     eventDescription: String,
