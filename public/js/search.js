@@ -357,6 +357,7 @@ function displayType(checked) {
         $("#searchLabel").css("display", "none")
         $("#search").css("display", "none")
         $("#submit").css("display", "none")
+        poke_type = $("#poke_type option:selected").val();
         registerTypeSearch(poke_type);
         getType($("#poke_type option:selected").val())
 
