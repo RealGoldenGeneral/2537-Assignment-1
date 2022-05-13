@@ -16,7 +16,7 @@ function loadEvents() {
 }
 
 function increaseHits() {
-    x = $(".like").attr("id")
+    x = $(this).attr("id")
     $.ajax({
         url: `https://polar-refuge-74063.herokuapp.com/timeline/increaseHits/${x}`,
         type: "get",
@@ -28,7 +28,7 @@ function increaseHits() {
 }
 
 function deleteElements() {
-    x = $(".like").attr("id")
+    x = $(this).attr("id")
     $.ajax({
         url: `https://polar-refuge-74063.herokuapp.com/timeline/delete/${x}`,
         type: "get",
