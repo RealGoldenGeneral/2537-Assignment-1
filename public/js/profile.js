@@ -129,8 +129,25 @@ async function loadPokemonInformation() {
     $("#information").html(to_add)
 }
 
+function addData(name) {
+    date = new Date()
+    time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    $.ajax({
+        url: "/timeline/insert",
+        type: "put",
+        data: {
+            eventDescription: `User has searched for pokemon with the ability ${name}.`,
+            hits: 1,
+            time: `At ${time}.`
+        },
+        success: ()=> console.log("Event added successfully.")
+    })
+}
+
 function setup() {
     loadPokemonInformation();
+    name = $("title").text();
+    addData(name);
 }
 
 $(document).ready(setup)
