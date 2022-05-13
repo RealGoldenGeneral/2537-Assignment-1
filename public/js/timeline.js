@@ -8,7 +8,7 @@ function loadEvents() {
                 $("main").append(`<div id="timeBlock">
                 <p> Description: ${data[i].eventDescription} ${data[i].time}</p>
                 <p> Hits: ${data[i].hits} </p>
-                <button class="like" id="${r[i]["_id"]}"> Accurate </button>`)
+                <button class="like" id="${data[i]["_id"]}"> Accurate </button>`)
             }
         }
     })
