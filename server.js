@@ -102,7 +102,7 @@ app.get('/timeline/delete/:id', function (req, res) {
     })
 })
 
-app.get('timeline/increaseHits/:id', function (req, res) {
+app.get('/timeline/increaseHits/:id', function (req, res) {
     timelineModel.updateOne({
         '_id': req.params.id
     }, {
