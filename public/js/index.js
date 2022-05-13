@@ -3,6 +3,20 @@ to_add = ''
 css_add = ''
 pokemon_array = []
 
+function registerClick(name) {
+    date = new Date()
+    time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    $.ajax({
+        url: "/timeline/insert",
+        type: "put",
+        data: {
+            eventDescription: `User has clicked on ${name}'s profile.`,
+            time: `At ${time}.`
+        },
+        success: ()=> console.log("Event added successfully.")
+    })
+}
+
 function colourChooser (data) {
     type = []
     firstColour = ""
@@ -178,7 +192,7 @@ function finishprocessPokeResp(data) {
 
 function processPokeResp(data) {
     to_add += `<div class="image_container" style=${css_add}>
-    <a href="/profile/${data.id}">
+    <a href="/profile/${data.id}" id="pokemonImage">
     <img src="${data.sprites.other["official-artwork"].front_default}">
     </a>
     <h4>${data.name}</h4>`
@@ -228,6 +242,10 @@ async function loadRandomPokemon() {
 
 function setup() {
     loadRandomPokemon();
+    $("#pokemonImage").click(() => {
+        pokemonName = $("h4").text()
+        registerClick(pokemonName)
+    })
 }
 
 jQuery(document).ready(setup)
