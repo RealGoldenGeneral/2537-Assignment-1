@@ -49,7 +49,7 @@ app.get('/profile/:id', function (req, res) {
     })
 })
 
-mongoose.connect("mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb/timeline", 
+mongoose.connect("mongodb://127.0.0.1:27017/timeline", 
 {useNewUrlParser: true, useUnifiedTopology: true });
 const eventSchema = new mongoose.Schema({
     eventDescription: String,
