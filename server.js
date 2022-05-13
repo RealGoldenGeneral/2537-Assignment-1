@@ -9,10 +9,6 @@ app.listen(process.env.PORT || 5000, function (err) {
         console.log(err)
 })
 
-app.use(bodyparser.urlencoded({
-    extended: true
-}));
-
 app.get('/', function(req, res) {
     res.sendFile(__dirname + '/public/html/index.html')
 })
@@ -62,17 +58,9 @@ const eventSchema = new mongoose.Schema({
 });
 const timelineModel = mongoose.model("timeline", eventSchema);
 
-app.get('/timeline', function (req, res) {
-    timelineModel.find({}, function (err, logs) {
-        if (err) {
-            console.log("Error: " + err);
-        } else {
-            console.log("Data: " + JSON.stringify(logs))
-        }
-        res.send(JSON.stringify(logs));
-    })
-})
-
+app.use(bodyparser.urlencoded({
+    extended: true
+}));
 
 app.get('/timeline/getAllEvents', function (req, res) {
     timelineModel.find({}, function (err, data) {
@@ -128,6 +116,24 @@ app.get('timeline/increaseHits/:id', function (req, res) {
         res.send("Successfully Updated.")
     })
 })
+
+app.use(bodyparser.urlencoded({
+    parameterLimit: 100000,
+    limit: '50mb',
+    extended: true
+}))
+
+app.get('/timeline', function (req, res) {
+    timelineModel.find({}, function (err, logs) {
+        if (err) {
+            console.log("Error: " + err);
+        } else {
+            console.log("Data: " + JSON.stringify(logs))
+        }
+        res.send(JSON.stringify(logs));
+    })
+})
+
 app.get('/search', function (req, res) {
     res.sendFile(__dirname + '/public/html/search.html')
 })
