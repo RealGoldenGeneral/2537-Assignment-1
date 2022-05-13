@@ -124,7 +124,7 @@ app.use(bodyparser.urlencoded({
 }))
 
 app.get('/history', function (req, res) {
-    res.sendFile(__dirname, "/public/html/timeline.html")
+    res.sendFile(__dirname + "/public/html/timeline.html")
 })
 
 app.get('/timeline', function (req, res) {
