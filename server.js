@@ -132,6 +132,7 @@ app.get('/timeline', function (req, res) {
         }
         res.send(JSON.stringify(logs));
     })
+    res.sendFile(__dirname + 'public/html/timeline.html')
 })
 
 app.get('/search', function (req, res) {
