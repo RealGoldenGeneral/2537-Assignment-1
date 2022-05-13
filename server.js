@@ -49,7 +49,7 @@ app.get('/profile/:id', function (req, res) {
     })
 })
 
-mongoose.connect("mongodb+srv://cluster0.v0ltm.mongodb.net/timeline", 
+mongoose.connect("mongodb+srv://NickyCheng:<password>@cluster0.v0ltm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", 
 {useNewUrlParser: true, useUnifiedTopology: true });
 const eventSchema = new mongoose.Schema({
     eventDescription: String,
