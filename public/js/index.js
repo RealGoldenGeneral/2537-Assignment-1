@@ -239,6 +239,10 @@ async function loadRandomPokemon() {
         }
     }
     jQuery("main").html(to_add)
+    $("#pokemonImage").click(() => {
+        pokemonName = $("h4").text()
+        registerClick(pokemonName)
+    })
 }
 
 function setup() {
