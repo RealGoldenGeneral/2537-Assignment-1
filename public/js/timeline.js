@@ -17,7 +17,7 @@ function loadEvents() {
 function increaseHits() {
     x = this._id
     $.ajax({
-        url: `https://polar-refuge-74063.herokuapp.com/timeline/increaseHits${x}`,
+        url: `https://polar-refuge-74063.herokuapp.com/timeline/increaseHits/${x}`,
         type: "get",
         success: function (x) {
             console.log(x)
