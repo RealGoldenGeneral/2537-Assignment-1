@@ -5,7 +5,7 @@ function loadEvents() {
         success: (data)=>{
             console.log(data)
             for(i = 0; i < data.length; i++) {
-                $("main").append(`<div id="timeBlock id="${data[i]["_id"]}">
+                $("main").append(`<div id="timeBlock" id="${data[i]["_id"]}">
                 <p> Description: ${data[i].eventDescription} ${data[i].time}</p>
                 <p> Hits: ${data[i].hits} </p>
                 <button class="like" id="${data[i]["_id"]}"> Accurate </button>
