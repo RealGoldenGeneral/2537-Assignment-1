@@ -260,7 +260,7 @@ function getType(type_) {
     css_add = ''
     $.ajax({
         type: "get",
-        url: `../grass.json`,
+        url: `https://pokeapi.co/api/v2/type/${type_}`,
         success: getPokemon
     })
 }

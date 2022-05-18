@@ -218,19 +218,19 @@ async function loadRandomPokemon() {
 
         await $.ajax({
             type: "GET",
-            url: `../pikachu.json`,
+            url: `https://pokeapi.co/api/v2/pokemon/${x}`,
             success: colourChooser
         })
 
         await $.ajax({
             type: "GET",
-            url: `../pikachu.json`,
+            url: `https://pokeapi.co/api/v2/pokemon/${x}`,
             success: processPokeResp
         })
 
         await $.ajax({
             type: "GET",
-            url: `../pikachu-species.json`,
+            url: `https://pokeapi.co/api/v2/pokemon-species/${x}`,
             success: finishprocessPokeResp
         })
 
