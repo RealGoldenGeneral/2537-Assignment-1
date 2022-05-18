@@ -142,4 +142,8 @@ app.get('/search', function (req, res) {
     res.sendFile(__dirname + '/public/html/search.html')
 })
 
+app.get('/login', function (req, res) {
+    res.sendFile(__dirname + '/public/html/login.html')
+})
+
 app.use(express.static("./public"))
