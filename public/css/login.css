@@ -8,7 +8,7 @@ body {
     background-image: url("../img/PSMD_poster.png");
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
