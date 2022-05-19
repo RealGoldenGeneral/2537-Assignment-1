@@ -56,7 +56,12 @@ const eventSchema = new mongoose.Schema({
     hits: Number,
     time: String
 });
+const userSchema = new mongoose.Schema({
+    username: String,
+    password: String
+})
 const timelineModel = mongoose.model("timeline", eventSchema);
+const userModel = mongoose.model("users", userSchema);
 
 app.use(bodyparser.urlencoded({
     extended: true
@@ -144,6 +149,31 @@ app.get('/search', function (req, res) {
 
 app.get('/login', function (req, res) {
     res.sendFile(__dirname + '/public/html/login.html')
+})
+
+function get_password(data) {
+    return data.password
+}
+
+app.post('/verify', function (req, res) {
+    username = req.body.username
+    password = req.body.password
+    userModel.find({name: username}, function (err, user) {
+        var info = user
+        if (err) {
+            console.log(err)
+        } else {
+            user = user.map(get_password)
+            if (req.body.password == user[0]) {
+                req.session.real_user = info
+                req.session.authenticated = true
+                res.send(req.session.real_user)
+            } else {
+                req.session.authenticated = false
+                res.send("incorrect information")
+            }
+        }
+    })
 })
 
 app.use(express.static("./public"))
