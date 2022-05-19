@@ -151,6 +151,10 @@ app.get('/login', function (req, res) {
     res.sendFile(__dirname + '/public/html/login.html')
 })
 
+app.get('/signup', function (req, res) {
+    res.sendFile(__dirname + '/public/html/signup.html')
+})
+
 function get_password(data) {
     return data.password
 }
