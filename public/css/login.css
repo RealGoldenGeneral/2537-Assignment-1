@@ -30,6 +30,10 @@ body {
     height: 30%;
 }
 
+#username, #password {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
 @media screen and (max-width: 600px) {
     #container {
         margin-left: 0%;
