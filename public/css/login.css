@@ -12,6 +12,7 @@ body {
 }
 
 #container {
+    margin-left: 25%;
     height: 100vh;
     display: flex;
     flex-direction: column;
