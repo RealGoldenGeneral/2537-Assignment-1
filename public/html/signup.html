@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>WebDex</title>
+</head>
+
+<body>
+    <div id="container">
+        <div id="signupScreen">
+            <h3>Create a New User:</h3>
+            <div id="usernameInput">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" pattern="[a-zA-Z0-9-_]{3, 25}">
+            </div>
+            <div id="passwordInput">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <div id="retypePasswordInput">
+                <label for="retypePassword">Retype Password:</label>
+                <input type="password" name="retypePassword" id="retypePassword">
+            </div>
+            <input type="submit" value="Login" id="login">
+            <p id="incorrect_information" style="display:none">Username or Password is incorrect.</p>
+        </div>
+    </div>
+</body>
+
+</html>
