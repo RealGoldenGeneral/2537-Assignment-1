@@ -12,7 +12,7 @@ body {
 }
 
 #container {
-    margin-left: 35%;
+    margin-left: 30%;
     height: 100vh;
     display: flex;
     flex-direction: column;
