@@ -2,6 +2,8 @@ body {
     background-image: url("https://archives.bulbagarden.net/media/upload/a/a7/PSMD_poster.png");
     background-size: cover;
     background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
 }
 
 #container {
