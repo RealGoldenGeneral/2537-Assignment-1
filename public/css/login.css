@@ -14,7 +14,8 @@ body {
 }
 
 #container {
-    margin-left: 30%;
+    margin-left: 33%;
+    margin-right: 33%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -26,6 +27,5 @@ body {
     border-radius: 10px;
     border-width: 5px;
     border-style: solid;
-    width: 50%;
     height: 30%;
 }
