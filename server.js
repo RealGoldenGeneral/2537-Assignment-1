@@ -58,7 +58,8 @@ const eventSchema = new mongoose.Schema({
 });
 const userSchema = new mongoose.Schema({
     username: String,
-    password: String
+    password: String,
+    pfp: String
 })
 const timelineModel = mongoose.model("timeline", eventSchema);
 const userModel = mongoose.model("users", userSchema);
@@ -177,6 +178,21 @@ app.post('/verify', function (req, res) {
                 res.send("incorrect information")
             }
         }
+    })
+})
+
+app.put('/addAccount', function (req, res) {
+    userModel.create({
+        username: req.body.username,
+        password: req.body.password,
+        pfp: '../img/profilepic.png'
+    }, function (err, data) {
+        if (err) {
+            console.log("Error: " + err)
+        } else {
+            console.log("New Account: " + data)
+        }
+        res.send("Data sent successfully!")
     })
 })
 
