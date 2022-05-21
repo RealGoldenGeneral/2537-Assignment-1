@@ -64,6 +64,13 @@ const userSchema = new mongoose.Schema({
 const timelineModel = mongoose.model("timeline", eventSchema);
 const userModel = mongoose.model("users", userSchema);
 
+const Joi = require('joi');
+
+const schema = Joi.object({
+    username: Joi.string().alphanum().min(3).max(30).required,
+    Password: Joi.string().pattern(new RegExp('^[a-zA-z0-9]{3, 30}$'))
+})
+
 app.use(bodyparser.urlencoded({
     extended: true
 }));
@@ -163,6 +170,13 @@ function get_password(data) {
 app.post('/verify', function (req, res) {
     username = req.body.username
     password = req.body.password
+    try {
+        const value = await schema.validateAsync({username: req.body.username});
+    }
+    catch (err) {
+        req.session.authenticated = false
+        res.send("invalid information")
+    }
     userModel.find({name: username}, function (err, user) {
         var info = user
         if (err) {
