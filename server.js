@@ -167,16 +167,20 @@ function get_password(data) {
     return data.password
 }
 
-app.post('/verify', function (req, res) {
-    username = req.body.username
-    password = req.body.password
+async function Asynccheck(username, password) {
     try {
-        const value = await schema.validateAsync({username: req.body.username});
+        const value = await schema.validateAsync({username: username, password: password});
     }
     catch (err) {
         req.session.authenticated = false
         res.send("invalid information")
     }
+}
+
+app.post('/verify', function (req, res) {
+    username = req.body.username
+    password = req.body.password
+    Asynccheck(username, password);
     userModel.find({name: username}, function (err, user) {
         var info = user
         if (err) {
