@@ -1,3 +1,12 @@
+function checkPasswords() {
+    if ($("#password").val() == $("#retypePassword").val()) {
+        $("#notMatching").remove();
+    } else {
+        $("#signupScreen").append('<p id="notMatching">The passwords do not match.</p>')
+    }
+}
+
+
 function redirectToLandingPage() {
     location.href = "/";
 }
@@ -17,6 +26,9 @@ function addAnAccount() {
 function setup() {
     $("#signup").click(() => {
         addAnAccount();
+    })
+    $("#retypePassword").change(() => {
+        checkPasswords();
     })
 }
 
