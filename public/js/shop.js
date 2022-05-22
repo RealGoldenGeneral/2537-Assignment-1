@@ -1,30 +1,33 @@
+to_add = ''
+
 function displayCard(data) {
-    $("main").append(`<div id="cardBlock">
-    <img src=${data.images.large}>
-    <p>${data.name}</p>
-    <p>Price: $${data.tcgplayer.prices[0].market}</p>
+    to_add += `<div id="cardBlock">
+    <img src=${data.data.images.large}>
+    <p>${data.data.name}</p>
+    <p>Price: $1.00</p>
     <button id="buy">Add to Cart</button>
-    </div>`)
+    </div>`
 }
 
-function getCard(data) {
-    for (i = 0; i < data; i++) {
-        if (i % 3 == 0) {
-        to_add += `<div class="images_group">`
+async function getCard(data) {
+    for (i = 1; i < data; i++) {
+        if (i % 3 == 1) {
+            to_add += `<div class="images_group">`
         }
-        $.ajaxSetup({
+        await $.ajaxSetup({
             beforeSend: function(xhr) {
                 xhr.setRequestHeader('X-Api-key', "bc186aa4-a677-4692-85f4-8e361dd471cc")
             }
         })
-        $.ajax({
+        await $.ajax({
             type: "get",
             url: `https://api.pokemontcg.io/v2/cards/swsh9-${i}`,
             success: displayCard
         })
 
-        if (i % 3 == 2) {
+        if (i % 3 == 0) {
             to_add += `</div>`
+            $("main").html(to_add)
         }
     }
 }
@@ -37,8 +40,11 @@ function getTotal() {
     })
     $.ajax({
         type: "get",
-        url: "https://api-pokemon.tcg.io/v2/set/swsh9",
-        success: getCard
+        url: "https://api.pokemontcg.io/v2/sets/swsh9",
+        success: (data) => {
+            total_count = data.data.printedTotal
+            getCard(total_count)
+        }
     })
 }
 
