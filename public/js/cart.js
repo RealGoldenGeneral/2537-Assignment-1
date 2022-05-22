@@ -25,6 +25,8 @@ function removeCartItems() {
         url: `/cart/delete/${x}`,
         success: () => {
             $(`#${x}`).remove()
+            $("#checkout").remove()
+            calculatePrice()
         }
     })
 }
