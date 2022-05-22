@@ -98,6 +98,17 @@ app.get('/timeline/getAllEvents', function (req, res) {
     });
 })
 
+app.get('/timeline/getAllEventsOfUser', function (req, res) {
+    timelineModel.find({username: req.session.real_user[0].username}, function (err, data) {
+        if (err) {
+            console.log("Error: " + err);
+        } else {
+            console.log("Data: " + data);
+        }
+        res.send(data)
+    });
+})
+
 app.put('/timeline/insert', function (req, res) {
     console.log(req.body)
     if (req.session.authenticated) {
