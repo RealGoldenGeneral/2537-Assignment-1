@@ -7,8 +7,13 @@ function checkPasswords() {
 }
 
 
-function redirectToLandingPage() {
-    location.href = "/";
+function redirectToLoginPage(data) {
+    $("#incorrect_information").remove()
+    if (data != "incorrect information.") {
+        location.href = "/login";
+    } else {
+        ("#signupScreen").append('<p id="incorrect_information">One or more information is incorrect.</p>')
+    }
 }
 
 function addAnAccount() {
@@ -19,7 +24,7 @@ function addAnAccount() {
             username: $("#username").val(),
             password: $("#password").val(),
         },
-        success: redirectToLandingPage
+        success: redirectToLoginPage
     })
 }
 
