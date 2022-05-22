@@ -305,7 +305,7 @@ app.put('/addToCart', function (req, res) {
             user: req.session.real_user[0].username,
             name: req.body.name,
             price: req.body.price
-        }, function (req, res) {
+        }, function (err, data) {
             if (err) {
                 console.log("Error: " + err)
             } else {
