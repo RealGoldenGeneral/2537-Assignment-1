@@ -333,4 +333,28 @@ app.get('/cart', function (req, res) {
     res.sendFile(__dirname + "./public/html/cart.html")
 })
 
+app.get('getCartItems/', function (req, res) {
+    cartModel.find({user: req.session.real_user[0].username}, function (err, data) {
+        if (err) {
+            console.log("Error: " + err)
+        } else {
+            console.log("Data: " + data)
+        }
+        res.send(data);
+    })
+})
+
+app.get('/cart/delete/:id', function (req, res) {
+    cartModel.remove({
+        '_id': req.params.id
+    }, function (err, data) {
+        if (err) {
+            console.log("Error: " + err);
+        } else {
+            console.log("Data: " + data);
+        }
+        res.send("Successfully deleted.")
+    })
+})
+
 app.use(express.static("./public"))
