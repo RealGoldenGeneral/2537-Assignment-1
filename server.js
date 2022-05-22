@@ -99,7 +99,7 @@ app.get('/timeline/getAllEvents', function (req, res) {
 })
 
 app.get('/timeline/getAllEventsOfUser', function (req, res) {
-    timelineModel.find({username: req.session.real_user[0].username}, function (err, data) {
+    timelineModel.find({user: req.session.real_user[0].username}, function (err, data) {
         if (err) {
             console.log("Error: " + err);
         } else {
