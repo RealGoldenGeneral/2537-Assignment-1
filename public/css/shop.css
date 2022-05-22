@@ -15,7 +15,6 @@ main {
     display: flex;
     flex-direction: row;
     justify-self: center;
-    width: 60%
 }
 #cardBlock {
     border-radius: 10px;

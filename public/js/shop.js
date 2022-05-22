@@ -11,7 +11,7 @@ function displayCard(data) {
 
 async function getCard(data) {
     for (i = 1; i < data; i++) {
-        if (i % 3 == 1) {
+        if (i % 5 == 1) {
             to_add += `<div class="images_group">`
         }
         await $.ajaxSetup({
@@ -25,7 +25,7 @@ async function getCard(data) {
             success: displayCard
         })
 
-        if (i % 3 == 0) {
+        if (i % 5 == 0) {
             to_add += `</div>`
             $("main").html(to_add)
         }
