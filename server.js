@@ -172,15 +172,18 @@ async function Asynccheck(username, password) {
         const value = await schema.validateAsync({username: username, password: password});
     }
     catch (err) {
-        req.session.authenticated = false
-        res.send("invalid information")
+        return err
     }
 }
 
 app.post('/verify', function (req, res) {
     username = req.body.username
     password = req.body.password
-    Asynccheck(username, password);
+    var errCheck = Asynccheck(username, password);
+    if (errCheck) {
+        req.session.authenticated = false
+        res.send("invalid information")
+    }
     userModel.find({name: username}, function (err, user) {
         var info = user
         if (err) {
