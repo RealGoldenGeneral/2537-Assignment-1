@@ -293,4 +293,17 @@ import pokemon from 'pokemontcgsdk'
 
 pokemon.configure({apiKey: 'bc186aa4-a677-4692-85f4-8e361dd471cc'})
 
+app.get('/getCardTotal', function (req, res) {
+    pokemon.set.find('swsh9').then(set => {
+        total_cards = set.printedTotal
+    })
+    res.send(total_cards);
+})
+
+app.get('/getCard/:id', function (req, res) {
+    pokemon.card.find(`swsh9-${req.params.id}`).then(card => {
+        res.send(card);
+    })
+})
+
 app.use(express.static("./public"))
