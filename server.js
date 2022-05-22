@@ -4,6 +4,10 @@ const mongoose = require('mongoose')
 const bodyparser = require("body-parser")
 app.set('view engine', 'ejs');
 
+var session = require('express-session')
+
+app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
+
 app.listen(process.env.PORT || 5000, function (err) {
     if (err)
         console.log(err)
@@ -65,10 +69,11 @@ const timelineModel = mongoose.model("timeline", eventSchema);
 const userModel = mongoose.model("users", userSchema);
 
 const Joi = require('joi');
+const req = require('express/lib/request');
 
 const schema = Joi.object({
-    username: Joi.string().alphanum().min(3).max(30).required,
-    Password: Joi.string().pattern(new RegExp('^[a-zA-z0-9]{3, 30}$'))
+    username: Joi.string().alphanum().min(3).max(30).required(),
+    password: Joi.string().pattern(new RegExp('[a-zA-Z0-9]')).min(3).max(30).required()
 })
 
 app.use(bodyparser.urlencoded({
@@ -156,11 +161,7 @@ app.get('/search', function (req, res) {
 })
 
 app.get('/login', function (req, res) {
-    if (req.session.authenticated == true) {
-        res.redirect("/userProfile")
-    } else {
-        res.sendFile(__dirname + '/public/html/login.html')
-    }
+    res.sendFile(__dirname + '/public/html/login.html')
 })
 
 app.get('/signup', function (req, res) {
@@ -171,26 +172,16 @@ function get_password(data) {
     return data.password
 }
 
-async function Asynccheck(username, password) {
-    try {
-        const value = await schema.validateAsync({username: username, password: password});
-    }
-    catch (err) {
-        return err
-    }
-}
-
 app.post('/verify', function (req, res) {
     username = req.body.username
     password = req.body.password
-    var errCheck = Asynccheck(username, password);
-    if (errCheck) {
-        req.session.authenticated = false
-        res.send("invalid information")
-    }
-    userModel.find({name: username}, function (err, user) {
+    userModel.find({username: username}, function (err, user) {
         var info = user
-        if (err) {
+        const {error} = schema.validate({username: username, password: password})
+        if (error) {
+            req.session.authenticated = false
+            res.send("incorrect information")
+        } else if (err) {
             console.log(err)
         } else {
             user = user.map(get_password)
@@ -210,9 +201,13 @@ app.put('/addAccount', function (req, res) {
     userModel.create({
         username: req.body.username,
         password: req.body.password,
-        pfp: './public/img/profilepic.png'
+        pfp: '../img/profilepic.png'
     }, function (err, data) {
-        if (err) {
+        const {error} = schema.validate({username: username, password: password})
+        if (error) {
+            req.session.authenticated = false
+            res.send("incorrect information")
+        } else if (err) {
             console.log("Error: " + err)
         } else {
             console.log("New Account: " + data)
