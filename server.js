@@ -6,14 +6,18 @@ app.set('view engine', 'ejs');
 
 var session = require('express-session')
 
-app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
+app.use(session({
+    secret: 'ssshhhhh',
+    saveUninitialized: true,
+    resave: true
+}));
 
 app.listen(process.env.PORT || 5000, function (err) {
     if (err)
         console.log(err)
 })
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     res.sendFile(__dirname + '/public/html/index.html')
 })
 const https = require('https');
@@ -24,8 +28,8 @@ app.get('/profile/:id', function (req, res) {
     https.get(url, function (https_res) {
         https_res.on("data", function (chunk) {
             data += chunk
-            })
-        https_res.on("end", function() {
+        })
+        https_res.on("end", function () {
             data = JSON.parse(data)
             abilities = data.abilities
             if (abilities.length == 3) {
@@ -53,10 +57,13 @@ app.get('/profile/:id', function (req, res) {
     })
 })
 
-mongoose.connect("mongodb+srv://NickyCheng:s4P6M6uqC57FSNOh@cluster0.v0ltm.mongodb.net/timeline?retryWrites=true&w=majority", 
-{useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb+srv://NickyCheng:s4P6M6uqC57FSNOh@cluster0.v0ltm.mongodb.net/timeline?retryWrites=true&w=majority", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 const eventSchema = new mongoose.Schema({
     eventDescription: String,
+    user: String,
     hits: Number,
     time: String
 });
@@ -93,22 +100,39 @@ app.get('/timeline/getAllEvents', function (req, res) {
 
 app.put('/timeline/insert', function (req, res) {
     console.log(req.body)
-    timelineModel.create({
-        'eventDescription': req.body.eventDescription,
-        'time': req.body.time,
-        'hits': req.body.hits
-    }, function (err, data) {
-        if (err) {
-            console.log("Error: " + err)
-        } else {
-            console.log("Data " + data);
-        }
-        res.send("Successfully inserted.");
-    });
+    if (req.session.authenticated) {
+        timelineModel.create({
+            'eventDescription': req.body.eventDescription,
+            'user': req.session.real_user[0].username,
+            'time': req.body.time,
+            'hits': req.body.hits
+        }, function (err, data) {
+            if (err) {
+                console.log("Error: " + err)
+            } else {
+                console.log("Data " + data);
+            }
+            res.send("Successfully inserted.");
+        });
+    } else {
+        timelineModel.create({
+            'eventDescription': req.body.eventDescription,
+            'user': 'Guest',
+            'time': req.body.time,
+            'hits': req.body.hits
+        }, function (err, data) {
+            if (err) {
+                console.log("Error: " + err)
+            } else {
+                console.log("Data " + data);
+            }
+            res.send("Successfully inserted.");
+        });
+    }
 })
 
 app.get('/timeline/delete/:id', function (req, res) {
-    timelineModel.remove ({
+    timelineModel.remove({
         '_id': req.params.id
     }, function (err, data) {
         if (err) {
@@ -124,7 +148,9 @@ app.get('/timeline/increaseHits/:id', function (req, res) {
     timelineModel.updateOne({
         '_id': req.params.id
     }, {
-        $inc: {'hits': 1}
+        $inc: {
+            'hits': 1
+        }
     }, function (err, data) {
         if (err) {
             console.log("Error: " + err);
@@ -175,9 +201,16 @@ function get_password(data) {
 app.post('/verify', function (req, res) {
     username = req.body.username
     password = req.body.password
-    userModel.find({username: username}, function (err, user) {
+    userModel.find({
+        username: username
+    }, function (err, user) {
         var info = user
-        const {error} = schema.validate({username: username, password: password})
+        const {
+            error
+        } = schema.validate({
+            username: username,
+            password: password
+        })
         if (error) {
             req.session.authenticated = false
             res.send("incorrect information")
@@ -203,7 +236,12 @@ app.put('/addAccount', function (req, res) {
         password: req.body.password,
         pfp: '../img/profilepic.png'
     }, function (err, data) {
-        const {error} = schema.validate({username: username, password: password})
+        const {
+            error
+        } = schema.validate({
+            username: username,
+            password: password
+        })
         if (error) {
             req.session.authenticated = false
             res.send("incorrect information")
