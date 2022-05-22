@@ -24,7 +24,7 @@ function deleteElements() {
 function displayEvents(data) {
     console.log(data)
     for (i = 0; i < data.length; i++) {
-        $("main").append(`<div id="${data[i]["_id"]}" class="timeBlock">
+        $("#timeline").append(`<div id="${data[i]["_id"]}" class="timeBlock">
                 <p> Description: ${data[i].eventDescription} ${data[i].time}</p>
                 <p> User: ${data[i].user} </p>
                 <p> Hits: ${data[i].hits} </p>
