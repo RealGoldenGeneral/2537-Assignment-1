@@ -23,6 +23,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background-color: antiquewhite;
 }
 img {
     opacity: 1;
