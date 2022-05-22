@@ -218,7 +218,7 @@ app.put('/addAccount', function (req, res) {
 
 app.get('/signOut', function (req, res) {
     req.session.authenticated = false
-    res.send("Signed out succesfully.")
+    res.redirect("/")
 })
 
 app.get('/userProfile', function (req, res) {
