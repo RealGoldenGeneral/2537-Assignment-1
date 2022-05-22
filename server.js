@@ -75,7 +75,7 @@ const userSchema = new mongoose.Schema({
 const cartSchema = new mongoose.Schema({
     cardImage: String,
     name: String,
-    price: String,
+    price: Number,
     user: String
 })
 const timelineModel = mongoose.model("timeline", eventSchema);
