@@ -17,7 +17,7 @@ main {
     border-width: 5px;
     border-style: solid;
 }
-#timeBlock {
+.timeBlock {
     background-color: aquamarine;
     border-color: white;
     border-style: solid;
