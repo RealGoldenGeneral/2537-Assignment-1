@@ -12,9 +12,14 @@ function getCard(data) {
         if (i % 3 == 0) {
         to_add += `<div class="images_group">`
         }
+        $.ajaxSetup({
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('X-Api-key', "bc186aa4-a677-4692-85f4-8e361dd471cc")
+            }
+        })
         $.ajax({
             type: "get",
-            url: `/getCard/${i}`,
+            url: `https://api.pokemontcg.io/v2/cards/swsh9-${i}`,
             success: displayCard
         })
 
@@ -25,9 +30,14 @@ function getCard(data) {
 }
 
 function getTotal() {
+    $.ajaxSetup({
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-Api-key', "bc186aa4-a677-4692-85f4-8e361dd471cc")
+        }
+    })
     $.ajax({
         type: "get",
-        url: "/getCardTotal",
+        url: "https://api-pokemon.tcg.io/v2/set/swsh9",
         success: getCard
     })
 }
