@@ -210,7 +210,7 @@ app.put('/addAccount', function (req, res) {
     userModel.create({
         username: req.body.username,
         password: req.body.password,
-        pfp: '../img/profilepic.png'
+        pfp: './public/img/profilepic.png'
     }, function (err, data) {
         if (err) {
             console.log("Error: " + err)
