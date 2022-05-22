@@ -156,7 +156,11 @@ app.get('/search', function (req, res) {
 })
 
 app.get('/login', function (req, res) {
-    res.sendFile(__dirname + '/public/html/login.html')
+    if (req.session.authenticated == true) {
+        res.redirect("/userProfile")
+    } else {
+        res.sendFile(__dirname + '/public/html/login.html')
+    }
 })
 
 app.get('/signup', function (req, res) {
