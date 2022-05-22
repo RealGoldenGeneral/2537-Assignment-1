@@ -311,7 +311,6 @@ app.put('/addToCart', function (req, res) {
             } else {
                 console.log("Data: " + data)
             }
-            res.send("Successfully added to cart.")
         })
     } else {
         cartModel.create({
@@ -325,9 +324,9 @@ app.put('/addToCart', function (req, res) {
             } else {
                 console.log("Data: " + data)
             }
-            res.send("Successfully added to cart.")
         })
     }
+    res.send("Successfully added to cart.")
 })
 
 app.use(express.static("./public"))
