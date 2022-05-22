@@ -318,7 +318,7 @@ app.put('/addToCart', function (req, res) {
             user: 'Guest',
             name: req.body.name,
             price: req.body.price
-        }, function (req, res) {
+        }, function (err, data) {
             if (err) {
                 console.log("Error: " + err)
             } else {
