@@ -3,6 +3,26 @@ to_add = ''
 css_add = ''
 pokemon_array = []
 
+function verified(data) {
+    if (data == true) {
+        $("#profile").show()
+        $("#login").hide()
+        $("#signOut").show()
+    } else {
+        $("#profile").hide()
+        $("#login").show()
+        $("#signOut").hide()
+    }
+}
+
+function checkLogin() {
+    $.ajax({
+        type: "get",
+        url: "/checkAuthentification",
+        success: verified
+    })
+}
+
 function registerClick(name) {
     date = new Date()
     time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
