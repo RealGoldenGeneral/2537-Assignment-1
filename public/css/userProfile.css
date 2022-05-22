@@ -75,4 +75,7 @@ nav a:hover {
     #lists {
         flex-direction: column;
     }
+    #timeline {
+        width: 100%;
+    }
 }
