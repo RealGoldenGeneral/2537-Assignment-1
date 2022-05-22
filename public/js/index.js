@@ -4,6 +4,7 @@ css_add = ''
 pokemon_array = []
 
 function verified(data) {
+    console.log(data);
     if (data == true) {
         $("#profile").show()
         $("#login").hide()
@@ -18,7 +19,7 @@ function verified(data) {
 function checkLogin() {
     $.ajax({
         type: "get",
-        url: "/checkAuthentification",
+        url: "/checkAuthentication",
         success: verified
     })
 }
@@ -261,8 +262,9 @@ async function loadRandomPokemon() {
     jQuery("main").html(to_add)
 }
 
-function setup() {
-    loadRandomPokemon();
+async function setup() {
+    await loadRandomPokemon();
+    await checkLogin();
 }
 
 jQuery(document).ready(setup)
