@@ -55,4 +55,7 @@ nav a:hover {
         display: flex;
         flex-direction: column;
     }
+    #mainInformation {
+        flex-direction: column;
+    }
 }
