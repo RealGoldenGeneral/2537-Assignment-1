@@ -329,4 +329,8 @@ app.put('/addToCart', function (req, res) {
     res.send("Successfully added to cart.")
 })
 
+app.get('/cart', function (req, res) {
+    res.sendFile(__dirname + "./public/html/cart.html")
+})
+
 app.use(express.static("./public"))
