@@ -78,9 +78,16 @@ const cartSchema = new mongoose.Schema({
     price: Number,
     user: String
 })
+const orderSchema = new mongoose.Schema({
+    cardImage: String,
+    name: String,
+    price: Number,
+    user: String
+})
 const timelineModel = mongoose.model("timeline", eventSchema);
 const userModel = mongoose.model("users", userSchema);
 const cartModel = mongoose.model("cart", cartSchema);
+const orderModel = mongoose.model("order", orderSchema);
 
 const Joi = require('joi');
 const req = require('express/lib/request');
@@ -355,6 +362,37 @@ app.get('/cart/delete/:id', function (req, res) {
         }
         res.send("Successfully deleted.")
     })
+})
+
+app.get('/checkout', function (req, res) {
+    cartModel.find({name: req.session.real_user[0].username}, function (err, data) {
+        if (err) {
+            console.log("Error: " + err);
+        } else {
+            for (i = 0; i < data.length; i++) {
+                orderModel.add({
+                    cardImage: data[i].cardImage,
+                    name: data[i].name,
+                    price: data[i].price,
+                    user: data[i].user
+                }, function (err, data) {
+                    if (err) {
+                        console.log("Error: " + err)
+                    } else {
+                        console.log("Data: " + data)
+                    }
+                })
+            }
+        }
+    })
+    cartModel.remove({name: req.session.real_user[0].username}, function (err, data) {
+        if (err) {
+            console.log("Error: " + err);
+        } else {
+            console.log("Data: " + data);
+        }
+    })
+    res.send("Checked out all items.")
 })
 
 app.use(express.static("./public"))
