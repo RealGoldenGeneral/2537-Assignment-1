@@ -289,4 +289,8 @@ app.get('/shop', function (req, res) {
     res.sendFile(__dirname + "/public/html/shop.html")
 })
 
+import pokemon from 'pokemontcgsdk'
+
+pokemon.configure({apiKey: 'bc186aa4-a677-4692-85f4-8e361dd471cc'})
+
 app.use(express.static("./public"))

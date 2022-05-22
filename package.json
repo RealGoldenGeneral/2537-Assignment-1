@@ -4,6 +4,7 @@
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "joi": "^17.6.0",
-    "mongoose": "^6.3.3"
+    "mongoose": "^6.3.3",
+    "pokemontcgsdk": "^2.0.0"
   }
 }
