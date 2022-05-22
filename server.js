@@ -232,4 +232,8 @@ app.get('/userProfile', function (req, res) {
     }
 })
 
+app.get('/checkAuthentication', function (req, res) {
+    res.send(req.session.authenticated)
+})
+
 app.use(express.static("./public"))
