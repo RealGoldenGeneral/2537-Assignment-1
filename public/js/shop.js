@@ -14,7 +14,7 @@ async function addToCart() {
         type: "put",
         url: "/addToCart",
         data: {
-            cardImage: cardInfo.data.images.large,
+            cardImage: cardInfo.data.images.small,
             name: cardInfo.data.name,
             price: 1.00,
         },
