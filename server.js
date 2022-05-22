@@ -330,10 +330,10 @@ app.put('/addToCart', function (req, res) {
 })
 
 app.get('/cart', function (req, res) {
-    res.sendFile(__dirname + "./public/html/cart.html")
+    res.sendFile(__dirname + "/public/html/cart.html")
 })
 
-app.get('getCartItems/', function (req, res) {
+app.get('/getCartItems', function (req, res) {
     cartModel.find({user: req.session.real_user[0].username}, function (err, data) {
         if (err) {
             console.log("Error: " + err)

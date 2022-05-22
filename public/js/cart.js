@@ -1,10 +1,30 @@
+async function calculatePrice() {
+    subtotal = 0
+    await $.ajax({
+        type: "get",
+        url: "/getCartItems",
+        success: (data) => {
+            for (j = 0; j < data.length; j++) {
+                subtotal += data[j].price
+            }
+        }
+    })
+    await $("main").append(`<div id="checkout">
+    <p>Subtotal: $${subtotal}</p>
+    <p>Tax: $${subtotal * 0.12}</p>
+    <p>Total: $${subtotal + (subtotal * 0.12)}</p>
+    <button id="order">Order Now</button>
+    </div>`)
+}
+
+
 function removeCartItems() {
     x = $(this).attr("id")
     $.ajax({
         type: "get",
         url: `/cart/delete/${x}`,
         success: () => {
-            $(`${x}`).remove()
+            $(`#${x}`).remove()
         }
     })
 }
@@ -31,9 +51,8 @@ function loadItems() {
 
 function setup() {
     loadItems()
-    $(".remove").click(function() {
-        removeCartItems()
-    })
+    $("body").on("click", ".remove", removeCartItems)
+    calculatePrice()
 }
 
 $(document).ready(setup)

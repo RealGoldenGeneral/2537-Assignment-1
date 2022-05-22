@@ -1,16 +1,16 @@
 to_add = ''
 
-function addToCart() {
+async function addToCart() {
     id = $(this).attr("class")
     cardInfo = ''
-    $.ajax ({
+    await $.ajax ({
         type: "get",
         url: `https://api.pokemontcg.io/v2/cards/${id}`,
-        success (data) {
+        success: (data) => {
             cardInfo = data
         }
     })
-    $.ajax({
+    await $.ajax({
         type: "put",
         url: "/addToCart",
         data: {
@@ -75,9 +75,7 @@ function getTotal() {
 
 function setup() {
     getTotal();
-    $("#buy").click(() =>{
-        addToCart();
-    })
+    $("body").on("click", "#buy", addToCart)
 }
 
 $(document).ready(setup)
