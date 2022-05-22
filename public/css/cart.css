@@ -5,6 +5,10 @@ html {
 body {
     margin: 0px;
 }
+main {
+    display: flex;
+    flex-direction: row;
+}
 nav {
     display: flex;
     justify-content: space-between;
@@ -30,6 +34,9 @@ nav a:hover {
     border-radius: 5px;
     border-style: solid;
     margin-right: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 @media screen and (max-width: 550px) {
     h1 {
