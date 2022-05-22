@@ -17,6 +17,13 @@ main {
     border-width: 5px;
     border-style: solid;
 }
+#lists {
+    display: flex;
+    flex-direction: row;
+}
+#timeline {
+    width: 50%;
+}
 .timeBlock {
     background-color: aquamarine;
     border-color: white;
