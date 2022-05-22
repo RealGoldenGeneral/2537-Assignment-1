@@ -1,4 +1,4 @@
-function set_error_message() {
+function hide_error_message() {
     $("#incorrect_information").hide()
 }
 
