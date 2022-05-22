@@ -1,3 +1,15 @@
+function checkout() {
+    $.ajax({
+        type: "get",
+        url: "/checkout",
+        success: () => {
+            alert("Successfully checked out items.");
+            location.href = "/"
+        }
+    })
+}
+
+
 async function calculatePrice() {
     subtotal = 0
     await $.ajax({
@@ -55,6 +67,7 @@ function setup() {
     loadItems()
     $("body").on("click", ".remove", removeCartItems)
     calculatePrice()
+    $("body").on("click", "#order", checkout)
 }
 
 $(document).ready(setup)
