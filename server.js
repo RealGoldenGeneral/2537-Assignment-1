@@ -365,26 +365,6 @@ app.get('/cart/delete/:id', function (req, res) {
 })
 
 app.get('/checkout', function (req, res) {
-    cartModel.find({name: req.session.real_user[0].username}, function (err, data) {
-        if (err) {
-            console.log("Error: " + err);
-        } else {
-            for (i = 0; i < data.length; i++) {
-                orderModel.add({
-                    cardImage: data[i].cardImage,
-                    name: data[i].name,
-                    price: data[i].price,
-                    user: data[i].user
-                }, function (err, data) {
-                    if (err) {
-                        console.log("Error: " + err)
-                    } else {
-                        console.log("Data: " + data)
-                    }
-                })
-            }
-        }
-    })
     cartModel.remove({name: req.session.real_user[0].username}, function (err, data) {
         if (err) {
             console.log("Error: " + err);
@@ -393,6 +373,22 @@ app.get('/checkout', function (req, res) {
         }
     })
     res.send("Checked out all items.")
+})
+
+app.put('/insertIntoOrder', function (req, res) {
+    orderModel.create({
+        cardImage: req.body.cardImage,
+        name: req.body.name,
+        price: req.body.price,
+        user: req.body.user
+    }, function (err, data) {
+        if (err) {
+            console.log("Error: " + err)
+        } else {
+            console.log("Data: " + data)
+        }
+    })
+    res.send("Inserted item into order.")
 })
 
 app.use(express.static("./public"))

@@ -1,9 +1,29 @@
-function checkout() {
-    $.ajax({
+async function checkout() {
+    cardInfo = ''
+    await $.ajax({
+        type: "get",
+        url: "/getCartItems",
+        success: (data) => {
+            cardInfo = data
+        }
+    })
+    for (k = 0; k < cardInfo.length; k++) {
+        await $.ajax({
+            type: "put",
+            url: "/insertIntoOrder",
+            data: {
+                cardImage: cardInfo[k].cardImage,
+                name: cardInfo[k].name,
+                price: cardInfo[k].price,
+                user: cardInfo[k].user
+            }
+        })
+    }
+    await $.ajax({
         type: "get",
         url: "/checkout",
         success: () => {
-            alert("Successfully checked out items.");
+            alert("Succesfully checked out all items")
             location.href = "/"
         }
     })
