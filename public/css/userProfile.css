@@ -72,4 +72,7 @@ nav a:hover {
     #mainInformation {
         flex-direction: column;
     }
+    #lists {
+        flex-direction: column;
+    }
 }
