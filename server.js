@@ -365,7 +365,7 @@ app.get('/cart/delete/:id', function (req, res) {
 })
 
 app.get('/checkout', function (req, res) {
-    cartModel.remove({name: req.session.real_user[0].username}, function (err, data) {
+    cartModel.remove({user: req.session.real_user[0].username}, function (err, data) {
         if (err) {
             console.log("Error: " + err);
         } else {
