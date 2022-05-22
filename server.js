@@ -226,4 +226,15 @@ app.get('/signOut', function (req, res) {
     res.send("Signed out succesfully.")
 })
 
+app.get('/userProfile', function (req, res) {
+    if (req.session.authenticated == true) {
+        res.render("userProfile.ejs", {
+            profilePicture: req.session.real_user[0].pfp,
+            username: req.session.real_user[0].username
+        })
+    } else {
+        res.redirect('/login');
+    }
+})
+
 app.use(express.static("./public"))
