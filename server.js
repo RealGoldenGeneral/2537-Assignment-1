@@ -72,8 +72,15 @@ const userSchema = new mongoose.Schema({
     password: String,
     pfp: String
 })
+const cartSchema = new mongoose.Schema({
+    cardImage: String,
+    name: String,
+    price: String,
+    user: String
+})
 const timelineModel = mongoose.model("timeline", eventSchema);
 const userModel = mongoose.model("users", userSchema);
+const cartModel = mongoose.model("cart", cartSchema);
 
 const Joi = require('joi');
 const req = require('express/lib/request');
@@ -99,7 +106,9 @@ app.get('/timeline/getAllEvents', function (req, res) {
 })
 
 app.get('/timeline/getAllEventsOfUser', function (req, res) {
-    timelineModel.find({user: req.session.real_user[0].username}, function (err, data) {
+    timelineModel.find({
+        user: req.session.real_user[0].username
+    }, function (err, data) {
         if (err) {
             console.log("Error: " + err);
         } else {
@@ -287,6 +296,38 @@ app.get('/checkAuthentication', function (req, res) {
 
 app.get('/shop', function (req, res) {
     res.sendFile(__dirname + "/public/html/shop.html")
+})
+
+app.put('/addToCart', function (req, res) {
+    if (req.session.authenticated == true) {
+        cartModel.create({
+            cardImage: req.body.cardImage,
+            user: req.session.real_user[0].username,
+            name: req.body.name,
+            price: req.body.price
+        }, function (req, res) {
+            if (err) {
+                console.log("Error: " + err)
+            } else {
+                console.log("Data: " + data)
+            }
+            res.send("Successfully added to cart.")
+        })
+    } else {
+        cartModel.create({
+            cardImage: req.body.cardImage,
+            user: 'Guest',
+            name: req.body.name,
+            price: req.body.price
+        }, function (req, res) {
+            if (err) {
+                console.log("Error: " + err)
+            } else {
+                console.log("Data: " + data)
+            }
+            res.send("Successfully added to cart.")
+        })
+    }
 })
 
 app.use(express.static("./public"))

@@ -1,5 +1,15 @@
 to_add = ''
 
+function addToCart() {
+    $.ajax({
+        type: "put",
+        url: "/addToCart",
+        success: () => {
+            alert("Successfully added to cart.")
+        }
+    })
+}
+
 function displayCard(data) {
     to_add += `<div id="cardBlock">
     <img src=${data.data.images.large}>
@@ -51,6 +61,9 @@ function getTotal() {
 
 function setup() {
     getTotal();
+    $("#buy").click(() =>{
+        addToCart();
+    })
 }
 
 $(document).ready(setup)
