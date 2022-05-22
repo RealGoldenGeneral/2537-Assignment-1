@@ -285,4 +285,8 @@ app.get('/checkAuthentication', function (req, res) {
     res.send(req.session.authenticated)
 })
 
+app.get('/shop', function (req, res) {
+    res.sendFile(__dirname + "/public/html/shop.html")
+})
+
 app.use(express.static("./public"))
