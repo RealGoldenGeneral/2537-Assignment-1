@@ -9,6 +9,10 @@ main {
     display: flex;
     flex-direction: row;
 }
+#cart_group {
+    display: flex;
+    flex-direction: column;
+}
 nav {
     display: flex;
     justify-content: space-between;

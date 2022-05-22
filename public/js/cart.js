@@ -70,7 +70,7 @@ function loadItems() {
         success: (data) => {
             console.log(data);
             for (i = 0; i < data.length; i++) {
-                $("main").append(`<div id=${data[i]["_id"]} class="cartBlock">
+                $("#cart_group").append(`<div id=${data[i]["_id"]} class="cartBlock">
                 <img src="${data[i].cardImage}">
                 <div>
                 <h3>${data[i].name}</h3>
