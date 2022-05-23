@@ -391,7 +391,7 @@ app.put('/insertIntoOrder', function (req, res) {
     res.send("Inserted item into order.")
 })
 
-app.put('/getPreviousOrders', function (req, res) {
+app.get('/getPreviousOrders', function (req, res) {
     orderModel.find({user: req.session.real_user[0].username}, function (err, data) {
         if (err) {
             console.log("Error: " + err)
