@@ -23,6 +23,7 @@ async function checkout() {
         url: "/getCartItems",
         success: (data) => {
             cardInfo = data
+            addEvent(data)
         }
     })
     for (k = 0; k < cardInfo.length; k++) {
