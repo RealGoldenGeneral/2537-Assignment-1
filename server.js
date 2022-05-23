@@ -391,4 +391,15 @@ app.put('/insertIntoOrder', function (req, res) {
     res.send("Inserted item into order.")
 })
 
+app.put('/getPreviousOrders', function (req, res) {
+    orderModel.find({}, function (err, data) {
+        if (err) {
+            console.log("Error: " + err)
+        } else {
+            console.log("Data: " + data)
+        }
+    })
+    res.send(data)
+})
+
 app.use(express.static("./public"))
