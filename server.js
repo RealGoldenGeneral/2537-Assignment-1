@@ -214,7 +214,11 @@ app.get('/search', function (req, res) {
 })
 
 app.get('/login', function (req, res) {
+    if (req.session.authenticated == false) {
     res.sendFile(__dirname + '/public/html/login.html')
+    } else {
+        res.redirect('/userProfile')
+    }
 })
 
 app.get('/signup', function (req, res) {
@@ -337,7 +341,11 @@ app.put('/addToCart', function (req, res) {
 })
 
 app.get('/cart', function (req, res) {
-    res.sendFile(__dirname + "/public/html/cart.html")
+    if (req.session.authenticated == true) {
+        res.sendFile(__dirname + "/public/html/cart.html")
+    } else {
+        res.redirect("/")
+    }
 })
 
 app.get('/getCartItems', function (req, res) {
@@ -405,6 +413,8 @@ app.get('/getPreviousOrders', function (req, res) {
 app.get('/orders', function (req, res) {
     if (req.session.authenticated == true) {
         res.sendFile(__dirname + "/public/html/orders.html")
+    } else {
+        res.redirect("/")
     }
 })
 
