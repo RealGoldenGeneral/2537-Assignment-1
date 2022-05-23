@@ -1,3 +1,21 @@
+function addEvent(data) {
+    date = new Date()
+    time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    total = 0
+    for (l = 0; l < data.length; l++) {
+        total += data[l].price
+    }
+    $.ajax({
+        data: {
+            eventDescription: `Checked out ${data.length} cards for $${total}.`,
+            time: `At ${time}.`,
+            hits: 1
+        },
+        type: "put",
+        url: "/timeline/insert"
+    })
+}
+
 async function checkout() {
     cardInfo = ''
     await $.ajax({

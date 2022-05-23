@@ -1,5 +1,19 @@
 to_add = ''
 
+function addEvent(data) {
+    date = new Date()
+    time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+    $.ajax({
+        type: 'put',
+        url: '/timeline/insert',
+        data: {
+            eventDescription: `Added ${data.data.name} card to cart.`,
+            time: `At ${time}.`,
+            hits: 1
+        },
+    })
+}
+
 async function addToCart() {
     id = $(this).attr("class")
     cardInfo = ''
@@ -8,6 +22,7 @@ async function addToCart() {
         url: `https://api.pokemontcg.io/v2/cards/${id}`,
         success: (data) => {
             cardInfo = data
+            addEvent(data)
         }
     })
     await $.ajax({
