@@ -21,6 +21,23 @@ main {
     display: flex;
     flex-direction: row;
 }
+.orderBlock {
+    background-color: red;
+    border-color: black;
+    border-width: 3px;
+    border-style: solid;
+    flex-direction: row;
+    display: flex;
+    gap: 20px;
+}
+#orderHistory {
+    width: 50%
+}
+#cardPhotos {
+    border: none;
+    width: 25%;
+    height: 25%;
+}
 #timeline {
     width: 50%;
 }

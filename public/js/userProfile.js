@@ -2,9 +2,11 @@ function displayOrders(data) {
     console.log(data)
     for(j = 0; j < data.length; j++) {
         $("#orderHistory").append(`<div class="orderBlock">
-        <img src="${data[j].cardImage}">
+        <img src="${data[j].cardImage}" id="cardPhotos">
+        <div>
         <p>${data[j].name}</p>
         <p>${data[j].price}</p>
+        </div>
         </div>`)
     }
 }
