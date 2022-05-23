@@ -392,7 +392,7 @@ app.put('/insertIntoOrder', function (req, res) {
 })
 
 app.put('/getPreviousOrders', function (req, res) {
-    orderModel.find({}, function (err, data) {
+    orderModel.find({user: req.session.real_user[0].username}, function (err, data) {
         if (err) {
             console.log("Error: " + err)
         } else {
