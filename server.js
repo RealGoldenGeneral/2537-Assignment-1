@@ -398,8 +398,8 @@ app.get('/getPreviousOrders', function (req, res) {
         } else {
             console.log("Data: " + data)
         }
+        res.send(data)
     })
-    res.send(data)
 })
 
 app.use(express.static("./public"))
