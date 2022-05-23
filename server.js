@@ -402,4 +402,10 @@ app.get('/getPreviousOrders', function (req, res) {
     })
 })
 
+app.get('/orders', function (req, res) {
+    if (req.session.authenticated == true) {
+        res.sendFile(__dirname + "/public/html/orders.html")
+    }
+})
+
 app.use(express.static("./public"))
