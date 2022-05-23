@@ -214,10 +214,10 @@ app.get('/search', function (req, res) {
 })
 
 app.get('/login', function (req, res) {
-    if (req.session.authenticated == false) {
-    res.sendFile(__dirname + '/public/html/login.html')
-    } else {
+    if (req.session.authenticated == true) {
         res.redirect('/userProfile')
+    } else {
+        res.sendFile(__dirname + '/public/html/login.html')
     }
 })
 
