@@ -1,3 +1,22 @@
+function displayOrders(data) {
+    console.log(data)
+    for(j = 0; j < data.length; j++) {
+        $("#orderHistory").append(`<div class="orderBlock">
+        <img src="${data.cardImage}">
+        <p>${data.name}</p>
+        <p>${data.price}</p>
+        </div>`)
+    }
+}
+
+function createOrders() {
+    $.ajax({
+        url: "/getPreviousOrders",
+        type: "get",
+        success: displayOrders
+    })
+}
+
 function increaseHits() {
     x = $(this).attr("id")
     $.ajax({
@@ -43,6 +62,7 @@ function createEvents() {
 
 function setup() {
     createEvents();
+    createOrders();
     $("body").on("click", ".like", increaseHits)
     $("body").on("click", ".delete", deleteElements)
 }
