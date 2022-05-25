@@ -70,7 +70,8 @@ const eventSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
     username: String,
     password: String,
-    pfp: String
+    pfp: String,
+    type: String
 })
 const cartSchema = new mongoose.Schema({
     cardImage: String,
@@ -265,7 +266,8 @@ app.put('/addAccount', function (req, res) {
     userModel.create({
         username: req.body.username,
         password: req.body.password,
-        pfp: '../img/profilepic.png'
+        pfp: '../img/profilepic.png',
+        type: 'user'
     }, function (err, data) {
         const {
             error
