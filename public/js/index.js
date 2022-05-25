@@ -6,13 +6,22 @@ pokemon_array = []
 function verified(data) {
     console.log(data);
     if (data == true) {
-        $("#profile").show()
-        $("#login").hide()
-        $("#signOut").show()
+        if (data.type == "admin") {
+            $("#profile").show()
+            $("#login").hide()
+            $("#signOut").show()
+            $("#admin").show()
+        } else {
+            $("#profile").show()
+            $("#login").hide()
+            $("#signOut").show()
+            $("#admin").hide()
+        }
     } else {
         $("#profile").hide()
         $("#login").show()
         $("#signOut").hide()
+        $("#admin").hide()
     }
 }
 
