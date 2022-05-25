@@ -1,4 +1,3 @@
-
 to_add = ''
 css_add = ''
 pokemon_array = []
@@ -6,17 +5,24 @@ pokemon_array = []
 function verified(data) {
     console.log(data);
     if (data == true) {
-        if (data.type == "admin") {
-            $("#profile").show()
-            $("#login").hide()
-            $("#signOut").show()
-            $("#admin").show()
-        } else {
-            $("#profile").show()
-            $("#login").hide()
-            $("#signOut").show()
-            $("#admin").hide()
-        }
+        $.ajax({
+            type: "get",
+            url: "/checkUserType",
+            success: (data) => {
+                console.log(data.type)
+                if (data == "admin") {
+                    $("#profile").show()
+                    $("#login").hide()
+                    $("#signOut").show()
+                    $("#admin").show()
+                } else {
+                    $("#profile").show()
+                    $("#login").hide()
+                    $("#signOut").show()
+                    $("#admin").hide()
+                }
+            }
+        })
     } else {
         $("#profile").hide()
         $("#login").show()
@@ -44,18 +50,18 @@ function registerClick(name) {
             hits: 1,
             time: `At ${time}.`
         },
-        success: ()=> console.log("Event added successfully.")
+        success: () => console.log("Event added successfully.")
     })
 }
 
-function colourChooser (data) {
+function colourChooser(data) {
     type = []
     firstColour = ""
     secondColour = ""
     for (l = 0; l < data.types.length; l++) {
         type[l] = data.types[l].type.name
     }
-    
+
     for (k = 0; k < type.length; k++) {
         if (type[k] == "normal") {
             if (k == 0) {
@@ -185,7 +191,7 @@ function colourChooser (data) {
                 secondColour = "darkviolet"
             }
         }
-        if (type[k] ==  "dark") {
+        if (type[k] == "dark") {
             if (k == 0) {
                 firstColour = "#705848"
             }
@@ -237,14 +243,14 @@ async function loadRandomPokemon() {
 
         x = Math.floor(Math.random() * 897) + 1
         pokemon_array[i] = x
-        
+
         if (i > 1)
-        for (m = 1; m < i - 1; m++) {
-            if (x == pokemon_array[m]) {
-                x = Math.floor(Math.random() * 897) + 1
-                pokemon_array[i] = x
+            for (m = 1; m < i - 1; m++) {
+                if (x == pokemon_array[m]) {
+                    x = Math.floor(Math.random() * 897) + 1
+                    pokemon_array[i] = x
+                }
             }
-        }
 
         await $.ajax({
             type: "GET",
