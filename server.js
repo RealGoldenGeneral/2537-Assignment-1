@@ -424,4 +424,12 @@ app.get('/orders', function (req, res) {
     }
 })
 
+app.get('/admin', function (req, res) {
+    if (req.session.authenticated == true) {
+        res.sendFile(__dirname + "/public/html/admin.html")
+    } else {
+        res.redirect("/")
+    }
+})
+
 app.use(express.static("./public"))
