@@ -34,11 +34,11 @@ nav a:hover {
 #game_grid{
     border: 2px tomato solid;
     width: 50%;
-    height: 50%;
+    height: 60%;
     display: flex;
     flex-wrap: wrap;
     perspective: 1000px;
-    gap: 10px
+    gap: 10px;
 }
 
 .card{
@@ -47,6 +47,7 @@ nav a:hover {
     position: relative;
     transition: transform 1s;
     transform-style: preserve-3d;
+    display: flex;
 
 }
 
@@ -59,9 +60,9 @@ img{
 
 .front_face, .back_face{
     position: absolute;
-    width: 50%;
+    width: 100%;
     height: auto;
-    max-height: 50%;
+    max-height: 100%;
     backface-visibility: hidden;
 }
 
