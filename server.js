@@ -540,4 +540,17 @@ app.get('/game', function (req, res) {
     res.sendFile(__dirname + "/public/html/game.html")
 })
 
+app.post('/validateBoardSize', function (req, res) {
+    const gameSizeSchema = Joi.object({
+        gameSize: Joi.string().pattern(new RegExp('([246]+[x][246]+)')).min(3).max(3).required()
+    })
+    const {error, value} = gameSizeSchema.validate({gameSize: req.body.gameSize})
+    if (error) {
+        console.log(error)
+        res.send(error)
+    } else {
+        res.send(req.body.gameSize)
+    }
+})
+
 app.use(express.static("./public"))
