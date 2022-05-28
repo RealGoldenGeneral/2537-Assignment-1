@@ -30,6 +30,13 @@ nav a:hover {
     border-radius: 5px;
     border-style: solid;
 }
+.profileEditor {
+    background-color: aquamarine;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 5px;
+    border-style: solid;
+}
 @media screen and (max-width: 550px) {
     h1 {
         margin: 0px;
