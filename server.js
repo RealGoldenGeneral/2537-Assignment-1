@@ -93,7 +93,7 @@ const orderModel = mongoose.model("order", orderSchema);
 const Joi = require('joi');
 const req = require('express/lib/request');
 
-const schema = Joi.object({
+const newUserSchema = Joi.object({
     username: Joi.string().alphanum().min(3).max(30).required(),
     password: Joi.string().pattern(new RegExp('[a-zA-Z0-9]')).min(3).max(30).required()
 })
@@ -239,7 +239,7 @@ app.post('/verify', function (req, res) {
         var info = user
         const {
             error
-        } = schema.validate({
+        } = newUserSchema.validate({
             username: username,
             password: password
         })
@@ -271,7 +271,32 @@ app.put('/addAccount', function (req, res) {
     }, function (err, data) {
         const {
             error
-        } = schema.validate({
+        } = newUserSchema.validate({
+            username: username,
+            password: password
+        })
+        if (error) {
+            req.session.authenticated = false
+            res.send("incorrect information")
+        } else if (err) {
+            console.log("Error: " + err)
+        } else {
+            console.log("New Account: " + data)
+        }
+        res.send("Data sent successfully!")
+    })
+})
+
+app.put('/addAdmin', function (req, res) {
+    userModel.create({
+        username: req.body.username,
+        password: req.body.password,
+        pfp: '../img/profilepic.png',
+        type: 'admin'
+    }, function (err, data) {
+        const {
+            error
+        } = newUserSchema.validate({
             username: username,
             password: password
         })
@@ -433,13 +458,70 @@ app.get('/admin', function (req, res) {
 })
 
 app.get('/getAllUsers', function (req, res) {
-    mongoose.userSchema({}, function (err, data) {
+    userModel.find({type: 'user'}, function (err, data) {
         if (err) {
             console.log("Error: " + err)
         } else {
             console.log("Data: " + data)
         }
         res.send(data)
+    })
+})
+
+app.post('/updateUsername/:id', function (req, res) {
+    const usernameSchema = Joi.object({
+        username: Joi.string().alphanum().min(3).max(30).required()
+    })
+    const {error, value} = usernameSchema.validate({username: req.body.newUsername})
+    if (error) {
+        console.log(error)
+        res.send(error)
+    } else {
+        userModel.updateOne({"_id": req.params.id}, {
+        $set: {username: req.body.newUsername}
+        }, function (err, data) {
+            if (err) {
+                console.log("Error: " + err)
+                res.send(err)
+            } else {
+                console.log("Data: " + data)
+                res.send("updated successfully")
+            }
+        })
+    }
+})
+
+app.post('/updatePassword/:id', function (req, res) {
+    const passwordSchema = Joi.object({
+        password: Joi.string().pattern(new RegExp('[a-zA-Z0-9]')).min(3).max(30).required()
+    })
+    const {error, value} = passwordSchema.validate({password: req.body.newPassword})
+    if (error) {
+        console.log(error)
+        res.send(error)
+    } else {
+        userModel.updateOne({"_id": req.params.id}, {
+        $set: {password: req.body.newPassword}
+        }, function (err, data) {
+            if (err) {
+                console.log("Error: " + err)
+                res.send(err)
+            } else {
+                console.log("Data: " + data)
+                res.send("updated successfully")
+            }
+        })
+    }
+})
+
+app.delete('/deleteUser/:id', function (req, res) {
+    userModel.remove({"_id": req.params.id}, function (err, data) {
+        if (err) {
+            console.log("Error: " + err)
+        } else {
+            console.log("Data: " + data)
+            res.send("successfully deleted")
+        }
     })
 })
 
