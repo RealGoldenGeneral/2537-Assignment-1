@@ -432,4 +432,15 @@ app.get('/admin', function (req, res) {
     }
 })
 
+app.get('/getAllUsers', function (req, res) {
+    mongoose.userSchema({}, function (err, data) {
+        if (err) {
+            console.log("Error: " + err)
+        } else {
+            console.log("Data: " + data)
+        }
+        res.send(data)
+    })
+})
+
 app.use(express.static("./public"))
