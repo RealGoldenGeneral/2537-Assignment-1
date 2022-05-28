@@ -547,7 +547,7 @@ app.post('/validateBoardSize', function (req, res) {
     const {error, value} = gameSizeSchema.validate({gameSize: req.body.gameSize})
     if (error) {
         console.log(error)
-        res.send(error)
+        res.send("incorrect information")
     } else {
         res.send(req.body.gameSize)
     }
