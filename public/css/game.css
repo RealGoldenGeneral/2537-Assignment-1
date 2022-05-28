@@ -10,6 +10,8 @@ main {
     flex-direction: row;
     justify-content: center;
     gap: 10px;
+    width: 100%;
+    height: 100vh;
 }
 nav {
     display: flex;
@@ -31,9 +33,8 @@ nav a:hover {
 }
 #game_grid{
     border: 2px tomato solid;
-    width: 600px;
-    height: 400px;
-    margin: auto;
+    width: 50%;
+    height: 50%;
     display: flex;
     flex-wrap: wrap;
     perspective: 1000px;
@@ -42,6 +43,7 @@ nav a:hover {
 
 .card{
     width: calc(33.3% - 10px);
+    height: calc(33.3% - 10px);
     position: relative;
     transition: transform 1s;
     transform-style: preserve-3d;
@@ -57,8 +59,9 @@ img{
 
 .front_face, .back_face{
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: auto;
+    max-height: 50%;
     backface-visibility: hidden;
 }
 
@@ -66,7 +69,7 @@ img{
     transform: rotateY(180deg);
 }
 
-.flip {
+#flip {
     transform: rotateY(180deg);
 }
 @media screen and (max-width: 550px) {
