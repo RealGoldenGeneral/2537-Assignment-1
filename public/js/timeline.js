@@ -1,6 +1,6 @@
 function loadEvents() {
     $.ajax({
-        url: "https://polar-refuge-74063.herokuapp.com/timeline/getAllEvents",
+        url: "/timeline/getAllEvents",
         type: 'get',
         success: (data)=>{
             console.log(data)
@@ -19,7 +19,7 @@ function loadEvents() {
 function increaseHits() {
     x = $(this).attr("id")
     $.ajax({
-        url: `https://polar-refuge-74063.herokuapp.com/timeline/increaseHits/${x}`,
+        url: `/increaseHits/${x}`,
         type: "get",
         success: () => {
             $("main").empty()
@@ -31,7 +31,7 @@ function increaseHits() {
 function deleteElements() {
     x = $(this).attr("id")
     $.ajax({
-        url: `https://polar-refuge-74063.herokuapp.com/timeline/delete/${x}`,
+        url: `/delete/${x}`,
         type: "get",
         success: function () {
             $(`#${x}`).remove()
