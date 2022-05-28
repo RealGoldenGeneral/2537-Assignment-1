@@ -536,4 +536,8 @@ app.delete('/deleteUser/:id', function (req, res) {
     })
 })
 
+app.get('/game', function (req, res) {
+    res.sendFile(__dirname + "/public/html/game.html")
+})
+
 app.use(express.static("./public"))
