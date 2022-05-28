@@ -468,6 +468,17 @@ app.get('/getAllUsers', function (req, res) {
     })
 })
 
+app.get('/findUser/:id', function (req, res) {
+    userModel.find({"_id": req.params.id}, function (err, data) {
+        if (err) {
+            console.log("Error: " + err)
+        } else {
+            console.log("Data: " + data)
+        }
+        res.send(data)
+    })
+})
+
 app.post('/updateUsername/:id', function (req, res) {
     const usernameSchema = Joi.object({
         username: Joi.string().alphanum().min(3).max(30).required()

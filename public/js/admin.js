@@ -1,4 +1,5 @@
 clicks = 0
+username = ''
 
 function addUser() {
     url = ''
@@ -113,9 +114,16 @@ function displayProfileEditor(){
     id = $(this).attr("id")
     $(`.profileEditor`).remove()
     clicks = 0
+    $.ajax({
+        type: "get",
+        url: `/findUser/${id}`,
+        success: (data) => {
+            username = data[0].username
+        }
+    })
     $('main').append(
         `<div class="profileEditor" id="${id}">
-        <h4>Editing user's profile:</h4>
+        <h4>Editing ${username}'s profile:</h4>
         <div id="form">
         <div id="usernameForm">
         <label for="username">Username: </label>
