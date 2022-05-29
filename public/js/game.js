@@ -39,7 +39,7 @@ async function createCards(data) {
                     x = Math.floor(Math.random() * (boardSize / 2))
                 }
                 if (j == 0) {
-                    await $("main").html(`<div><h3>Time Remaining: ${timer}</h3></div><div id='game_grid'>`)
+                    await $("main").html(`<div><h3 id="timer">Time Remaining: </h3></div><div id='game_grid'>`)
                 }
                 await $.ajax({
                     type: "get",
@@ -58,6 +58,19 @@ async function createCards(data) {
                     await $("main").append("</div></div>")
                 }
             }
+            var timeEnds = new Date()
+                timeEnds.setSeconds(timeEnds.getSeconds() + timer)
+                var countdown = setInterval(function() {
+                    var now = new Date().getTime()
+                    distance = (timeEnds.getTime()) - now
+                    seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    document.getElementById("timer").innerHTML = `Time Remaining: ${seconds}`;
+                    if (distance == 0) {
+                        clearInterval(countdown)
+                        $("body").off("click", ".card")
+                        $("main").append("<div><h3>You ran out of time!</h3><button id='replay'>Play Again</button></div>")
+                    }
+                }, 1000);
         }
     }
 }
