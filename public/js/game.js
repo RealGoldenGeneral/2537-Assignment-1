@@ -13,7 +13,7 @@ rowSize = 0
 
 function createEvent(data) {
     if (data == "success") {
-        var time = new Date()
+        var date = new Date()
         time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         $.ajax({
             url: "/timeline/insert",
@@ -28,7 +28,7 @@ function createEvent(data) {
             }
         })
     } else if (data == "failure") {
-        var time = new Date()
+        var date = new Date()
         time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
         $.ajax({
             url: "/timeline/insert",
@@ -106,6 +106,7 @@ async function createCards(data) {
                         clearInterval(countdown)
                         $("body").off("click", ".card")
                         $("main").append("<div><h3>You ran out of time!</h3><button id='replay'>Play Again</button></div>")
+                        createEvent("failure")
                     } else if (game_score == pokemon_array.length) {
                         clearInterval(countdown)
                     }
@@ -153,6 +154,7 @@ function clickCards() {
                 $("body").off("click", `.${$(`#${secondCard.id}`).parent()[0].class}`)
                 if (game_score == pokemon_array.length) {
                     $("main").append("<div><h3>You win!</h3><button id='replay'>Play Again</button></div>")
+                    createEvent("success")
                 }
             } else {
                 console.log("not a match");
