@@ -18,7 +18,7 @@ async function createCards(data) {
         } else {
             columnSize = parseInt(data[0])
             rowSize = parseInt(data[2])
-            timer = 15 * rowSize + (15 * (rowSize - columnSize))
+            timer = 10 * rowSize + (10 * (rowSize - columnSize))
             for (i = 0; i < boardSize / 2; i++) {
                 x = Math.floor(Math.random() * 897) + 1
                 pokemon_array[i] = x
@@ -112,6 +112,9 @@ function setup() {
                 }, 1000)
             }
         }
+    })
+    $("body").on("click", "#replay", () => {
+        location.reload()
     })
 }
 
