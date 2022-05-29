@@ -10,11 +10,13 @@ game_score = 0
 timer = 100
 async function createCards(data) {
     if (data == "incorrect information") {
-        $("main").append("<p>Invalid game size.</p>")
+        $("#error").remove()
+        $("main").append("<p id='error'>Invalid game size.</p>")
     } else {
         boardSize = parseInt(data[0]) * parseInt(data[2])
         if (boardSize % 2 == 1) {
-            $("main").append("<p>Invalid game size (odd amount of cards).</p>")
+            $("#error").remove()
+            $("main").append("<p id='error'>Invalid game size (odd amount of cards).</p>")
         } else {
             columnSize = parseInt(data[0])
             rowSize = parseInt(data[2])
