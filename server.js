@@ -537,7 +537,11 @@ app.delete('/deleteUser/:id', function (req, res) {
 })
 
 app.get('/game', function (req, res) {
-    res.sendFile(__dirname + "/public/html/game.html")
+    if (req.session.authenticated) {
+        res.sendFile(__dirname + "/public/html/game.html")
+    } else {
+        res.redirect("/")
+    }
 })
 
 app.post('/validateBoardSize', function (req, res) {
