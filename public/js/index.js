@@ -13,11 +13,13 @@ function verified(data) {
                 if (data == "admin") {
                     $("#profile").show()
                     $("#login").hide()
+                    $("#game").show()
                     $("#signOut").show()
                     $("#admin").show()
                 } else {
                     $("#profile").show()
                     $("#login").hide()
+                    $("#game").show()
                     $("#signOut").show()
                     $("#admin").hide()
                 }
@@ -26,6 +28,7 @@ function verified(data) {
     } else {
         $("#profile").hide()
         $("#login").show()
+        $("#game").show()
         $("#signOut").hide()
         $("#admin").hide()
     }
