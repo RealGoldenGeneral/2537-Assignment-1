@@ -542,7 +542,7 @@ app.get('/game', function (req, res) {
 
 app.post('/validateBoardSize', function (req, res) {
     const gameSizeSchema = Joi.object({
-        gameSize: Joi.string().pattern(new RegExp('([246]+[x][246]+)')).min(3).max(3).required()
+        gameSize: Joi.string().pattern(new RegExp('([3-8]+[x][3-8]+)')).min(3).max(3).required()
     })
     const {error, value} = gameSizeSchema.validate({gameSize: req.body.gameSize})
     if (error) {
