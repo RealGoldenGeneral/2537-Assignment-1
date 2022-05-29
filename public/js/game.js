@@ -69,6 +69,8 @@ async function createCards(data) {
                         clearInterval(countdown)
                         $("body").off("click", ".card")
                         $("main").append("<div><h3>You ran out of time!</h3><button id='replay'>Play Again</button></div>")
+                    } else if (game_score == pokemon_array.length) {
+                        clearInterval(countdown)
                     }
                 }, 1000);
         }
@@ -84,6 +86,48 @@ function getGameSize() {
         url: "/validateBoardSize",
         success: createCards
     })
+}
+
+function clickCards() {
+    $(this).attr("id", "flip")
+
+        if (!firstCardHasBeenFlipped) {
+            // the first card
+            firstCard = $(this).find(".front_face")[0]
+            // console.log(firstCard);
+            firstCardHasBeenFlipped = true
+        } else {
+            // this is the 2nd card
+            secondCard = $(this).find(".front_face")[0]
+            firstCardHasBeenFlipped = false
+            console.log(firstCard, secondCard);
+            // ccheck if we have match!
+            if (
+                $(`#${firstCard.id}`).attr("src") ==
+                $(`#${secondCard.id}`).attr("src") &&
+                $(`#${firstCard.id}`).attr("id") !=
+                $(`#${secondCard.id}`).attr("id")
+            ) {
+                console.log("a match!");
+                // update the game state
+                game_score++
+                // disable clicking events on these cards
+                $("body").off("click", `.${$(`#${firstCard.id}`).parent()[0].class}`)
+                $("body").off("click", `.${$(`#${secondCard.id}`).parent()[0].class}`)
+                if (game_score == pokemon_array.length) {
+                    $("main").append("<div><h3>You win!</h3><button id='replay'>Play Again</button></div>")
+                }
+            } else {
+                console.log("not a match");
+                // unflipping
+                $("body").off("click", ".card")
+                setTimeout(() => {
+                    $(`#${firstCard.id}`).parent().removeAttr("id")
+                    $(`#${secondCard.id}`).parent().removeAttr("id")
+                    $("body").on("click", ".card", clickCards)
+                }, 1000)
+            }
+        }
 }
 
 function setup() {
@@ -120,10 +164,11 @@ function setup() {
             } else {
                 console.log("not a match");
                 // unflipping
+                $("body").off("click", ".card")
                 setTimeout(() => {
                     $(`#${firstCard.id}`).parent().removeAttr("id")
                     $(`#${secondCard.id}`).parent().removeAttr("id")
-
+                    $("body").on("click", ".card", clickCards)
                 }, 1000)
             }
         }
