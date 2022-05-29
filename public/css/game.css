@@ -34,7 +34,7 @@ nav a:hover {
 #game_grid{
     border: 2px tomato solid;
     width: 50%;
-    height: 60vh;
+    height: 80vh;
     display: flex;
     flex-wrap: wrap;
     perspective: 1000px;
