@@ -20,7 +20,7 @@ async function createCards(data) {
         } else {
             columnSize = parseInt(data[0])
             rowSize = parseInt(data[2])
-            timer = 10 * rowSize + (10 * (rowSize - columnSize))
+            timer = 7 * rowSize + (7 * (rowSize - columnSize))
             for (i = 0; i < boardSize / 2; i++) {
                 x = Math.floor(Math.random() * 897) + 1
                 pokemon_array[i] = x
@@ -65,7 +65,7 @@ async function createCards(data) {
                     distance = (timeEnds.getTime()) - now
                     seconds = Math.floor((distance % (1000 * 60)) / 1000);
                     document.getElementById("timer").innerHTML = `Time Remaining: ${seconds}`;
-                    if (distance == 0) {
+                    if (distance <= 0) {
                         clearInterval(countdown)
                         $("body").off("click", ".card")
                         $("main").append("<div><h3>You ran out of time!</h3><button id='replay'>Play Again</button></div>")
