@@ -8,6 +8,43 @@ pokemon_array = []
 to_add = ''
 game_score = 0
 timer = 100
+columnSize = 0
+rowSize = 0
+
+function createEvent(data) {
+    if (data == "success") {
+        var time = new Date()
+        time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+        $.ajax({
+            url: "/timeline/insert",
+            type: "put",
+            data: {
+                eventDescription: `User has completed a ${columnSize} by ${rowSize} memory game.`,
+                hits: 1,
+                time: `At ${time}.`
+            },
+            success: () => {
+                console.log("Event added successfully.")
+            }
+        })
+    } else if (data == "failure") {
+        var time = new Date()
+        time = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
+        $.ajax({
+            url: "/timeline/insert",
+            type: "put",
+            data: {
+                eventDescription: `User failed to complete a ${columnSize} by ${rowSize} memory game.`,
+                hits: 1,
+                time: `At ${time}.`
+            },
+            success: () => {
+                console.log("Event added successfully.")
+            }
+        })
+    }
+
+}
 async function createCards(data) {
     if (data == "incorrect information") {
         $("#error").remove()
@@ -64,7 +101,7 @@ async function createCards(data) {
                     var now = new Date().getTime()
                     distance = (timeEnds.getTime()) - now
                     seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                    document.getElementById("timer").innerHTML = `Time Remaining: ${seconds}`;
+                    $("#timer").html(`Time Remaining: ${seconds}`)
                     if (distance <= 0) {
                         clearInterval(countdown)
                         $("body").off("click", ".card")
