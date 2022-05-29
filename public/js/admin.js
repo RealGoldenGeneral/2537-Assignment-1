@@ -110,18 +110,18 @@ function submitNewUsername() {
 }
 
 
-function displayProfileEditor(){
+async function displayProfileEditor(){
     id = $(this).attr("id")
     $(`.profileEditor`).remove()
     clicks = 0
-    $.ajax({
+    await $.ajax({
         type: "get",
         url: `/findUser/${id}`,
         success: (data) => {
             username = data[0].username
         }
     })
-    $('main').append(
+    await $('main').append(
         `<div class="profileEditor" id="${id}">
         <h4>Editing ${username}'s profile:</h4>
         <div id="form">
